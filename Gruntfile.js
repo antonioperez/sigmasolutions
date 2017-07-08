@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
     // Configurable paths for the app
     var appConfig = {
-        app: 'app',
+        app: 'frontend',
         dist: 'dist'
     };
 
@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         // The grunt server settings
         connect: {
             options: {
-                port: 9000,
+                port: 9001,
                 hostname: 'localhost',
                 livereload: 35729
             },
@@ -56,14 +56,14 @@ module.exports = function (grunt) {
                     optimization: 2
                 },
                 files: {
-                    "app/styles/style.css": "app/less/style.less"
+                    "frontend/styles/style.css": "frontend/less/style.less"
                 }
             }
         },
         // Watch for changes in live edit
         watch: {
             styles: {
-                files: ['app/less/**/*.less'],
+                files: ['frontend/less/**/*.less'],
                 tasks: ['less', 'copy:styles'],
                 options: {
                     nospawn: true,
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: 'app/index.html',
+            html: 'frontend/index.html',
             options: {
                 dest: 'dist'
             }
