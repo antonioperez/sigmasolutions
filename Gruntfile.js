@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                 },
             },
             js: {
-                files: ['<%= inspinia.app %>/scripts/{,*/}*.js'],
+                files: ['<%= inspinia.app %>/components/core/{,*/}*.js'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= inspinia.dist %>/scripts/{,*/}*.js',
+                    '<%= inspinia.dist %>/components/core/{,*/}*.js',
                     '<%= inspinia.dist %>/styles/{,*/}*.css',
                     '<%= inspinia.dist %>/styles/fonts/*'
                 ]
