@@ -28,7 +28,7 @@ function config($stateProvider, $urlRouterProvider) {
         })
 }
 angular
-    .module('inspinia')
+    .module('app')
     .config(config)
     .run(function($rootScope, $state) {
         $rootScope.$state = $state;

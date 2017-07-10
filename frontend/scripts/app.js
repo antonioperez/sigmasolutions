@@ -3,7 +3,7 @@
  *
  */
 (function () {
-    angular.module('inspinia', [
+    angular.module('app', [
         'ui.router',                    // Routing
         'ui.bootstrap'                 // Bootstrap
     ])
