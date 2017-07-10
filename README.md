@@ -4,7 +4,7 @@ To run the app:
 
   **Note:** you will need npm, bower, and grunt installed on your machine
 
-  *// Install dependencies (only need to do this the first time)*
+  *// Install dependencies (only required the first time)*
   ```
   npm install
   ```
