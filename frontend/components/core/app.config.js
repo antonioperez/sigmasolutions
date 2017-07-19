@@ -7,7 +7,7 @@
  *
  */
 function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/index/main");
+    $urlRouterProvider.otherwise("/login");
 
     $stateProvider
 
@@ -25,6 +25,21 @@ function config($stateProvider, $urlRouterProvider) {
             url: "/minor",
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Example view' }
+        })
+        .state('login', {
+            url: "/login",
+            templateUrl: "components/account/login.html",
+            data: { pageTitle: 'Login', specialClass: 'gray-bg' }
+        })
+        .state('forgot_password', {
+            url: "/forgot_password",
+            templateUrl: "components/account/forgot.password.html",
+            data: { pageTitle: 'Forgot password', specialClass: 'gray-bg' }
+        })
+        .state('register', {
+            url: "/register",
+            templateUrl: "components/account/register.html",
+            data: { pageTitle: 'Register', specialClass: 'gray-bg' }
         })
 }
 angular
