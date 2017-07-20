@@ -8,7 +8,6 @@
  */
 function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/login");
-
     $stateProvider
 
         .state('index', {
@@ -25,6 +24,11 @@ function config($stateProvider, $urlRouterProvider) {
             url: "/minor",
             templateUrl: "views/minor.html",
             data: { pageTitle: 'Example view' }
+        })
+        .state('index.mapper', {
+            url: "/mapper",
+            templateUrl: "views/mapper/viewer.html",
+            data: { pageTitle: 'Map Viewer' }
         })
         .state('login', {
             url: "/login",
