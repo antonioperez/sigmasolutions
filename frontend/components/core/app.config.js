@@ -13,21 +13,16 @@ function config($stateProvider, $urlRouterProvider) {
         .state('index', {
             abstract: true,
             url: "/index",
-            templateUrl: "views/common/content.html",
+            templateUrl: "components/layout/content.html",
         })
         .state('index.main', {
             url: "/main",
-            templateUrl: "views/main.html",
-            data: { pageTitle: 'Example view' }
-        })
-        .state('index.minor', {
-            url: "/minor",
-            templateUrl: "views/minor.html",
+            templateUrl: "components/layout/main.html",
             data: { pageTitle: 'Example view' }
         })
         .state('index.mapper', {
             url: "/mapper",
-            templateUrl: "views/mapper/viewer.html",
+            templateUrl: "components/mapper/viewer.html",
             data: { pageTitle: 'Map Viewer' }
         })
         .state('login', {

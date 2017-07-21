@@ -122,7 +122,7 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             '*.html',
-                            'views/{,*/}*.html',
+                            'components/{,*/}*.html',
                             'styles/patterns/*.*',
                             'img/{,*/}*.*'
                         ]
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= inspinia.dist %>',
-                    src: ['*.html', 'views/{,*/}*.html'],
+                    src: ['*.html', 'components/{,*/}*.html'],
                     dest: '<%= inspinia.dist %>'
                 }]
             }
