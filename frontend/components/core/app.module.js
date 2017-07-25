@@ -4,7 +4,8 @@
  */
 (function () {
     angular.module('app', [
-        'ui.router',                    // Routing
-        'ui.bootstrap'                 // Bootstrap
+        'ui.router',
+        'ui.bootstrap',
+        'oc.lazyLoad'
     ])
 })();
