@@ -1,16 +1,121 @@
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
       <div class="ibox float-e-margins">
-        <div class="ibox-content" ng-controller="chartJsCtrl as chart">
+        <div class="ibox-content">
           <div>
-            <h1 class="m-b-xs">Some Water Related Stuff</h1>
-            <h3 class="font-bold no-margins">
-              Some More Text
-            </h3>
+            <h1 class="m-b-xs">Statistics to Date</h1>
+            <h4 class="font-bold no-margins">
+              July 17, 2017
+            </h4>
           </div>
           <div>
-            <canvas linechart options="chart.lineOptions" data="chart.lineData" height="70" responsive=true ></canvas>
+            <canvas linechart options="dashboard.lineOptions" data="dashboard.lineData" height="70" responsive=true ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Pie </h5>
+          <div ibox-tools></div>
+        </div>
+        <div class="ibox-content">
+          <div>
+            <canvas doughnutchart options="dashboard.doughnutOptions" data="dashboard.doughnutData" responsive="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="col-md-12">
+        <div class="ibox float-e-margins" style="margin-bottom: 12px;">
+          <div class="ibox-title">
+            <span class="pull-right"><i class="fa fa-cog"></i></span>
+            <h5>Main Basin</h5>
+          </div>
+          <div class="ibox-content" responsive="true" height="200">
+            <h1 class="no-margins">886,200</h1>
+            <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+            <small>Gallons of water</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="pull-right"><i class="fa fa-cog"></i></span>
+            <h5>Sub Basin</h5>
+          </div>
+          <div class="ibox-content" height="200" responsive="true">
+            <h1 class="no-margins">356,456</h1>
+            <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+            <small>Gallons of water</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Bar Chart Example</h5>
+          <div ibox-tools></div>
+        </div>
+        <div class="ibox-content">
+          <div>
+            <canvas barchart options="dashboard.barOptions" data="dashboard.barData" responsive="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>All Posted GSA Notices</h5>
+          <div ibox-tools></div>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-3 col-sm-offset-9 m-b-xs">
+              <select class="input-sm form-control input-s-sm inline">
+                <option value="0">11 Nov - 10 Dec</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>GSA Name</th>
+                  <th>Basin</th>
+                  <th>Basin Number</th>
+                  <th>Manager</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Numbers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-repeat="notice in dashboard.notices">
+                  <td>
+                    <input icheck type="checkbox" data-ng-model="notice.selected">
+                  </td>
+                  <td>{{::notice.name}}</td>
+                  <td>{{::notice.basin}}</td>
+                  <td>{{::notice.basinNumber}}</td>
+                  <td>{{::notice.manager}}</td>
+                  <td>{{::notice.email}}</td>
+                  <td>{{::notice.date}}</td>
+                  <td>{{::notice.numbers}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
