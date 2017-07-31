@@ -1,16 +1,27 @@
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
       <div class="ibox float-e-margins">
-        <div class="ibox-content">
-          <div>
-            <h1 class="m-b-xs">Statistics to Date</h1>
-            <h4 class="font-bold no-margins">
-              July 17, 2017
-            </h4>
+        <div class="ibox-title">
+          <h5>Statistics to Date</h5>
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-xs btn-white">
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              <button type="button" class="btn btn-xs btn-white active">
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
-          <div>
-            <canvas linechart options="dashboard.lineOptions" data="dashboard.lineData" height="70" responsive=true ></canvas>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="flot-chart">
+                <div flot class="flot-chart-content" dataset="dashboard.flotData" options="dashboard.flotOptions"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
