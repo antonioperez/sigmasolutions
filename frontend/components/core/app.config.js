@@ -9,7 +9,7 @@ function config($stateProvider, $urlRouterProvider) {
 }
 angular
   .module('app')
-  .config(config)
-  .run(function($rootScope, $state) {
+  .config([ '$stateProvider', '$urlRouterProvider', config ])
+  .run([ '$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$state = $state;
-  });
+  }]);

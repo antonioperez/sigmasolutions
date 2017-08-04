@@ -19,4 +19,4 @@ function config($stateProvider) {
 }
 angular
     .module('app')
-    .config(config);
+    .config([ '$stateProvider', config]);

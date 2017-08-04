@@ -1,11 +1,3 @@
-/**
- * INSPINIA - Responsive Admin Theme
- *
- */
-
-/**
- * MainCtrl - controller
- */
 function MainCtrl() {
     var vm = this;
 

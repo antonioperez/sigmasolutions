@@ -173,8 +173,8 @@ function iboxToolsFullScreen($timeout) {
  */
 angular
     .module('app')
-    .directive('pageTitle', pageTitle)
-    .directive('sideNavigation', sideNavigation)
-    .directive('iboxTools', iboxTools)
-    .directive('minimalizaSidebar', minimalizaSidebar)
-    .directive('iboxToolsFullScreen', iboxToolsFullScreen);
+    .directive('pageTitle', [ '$rootScope', '$timeout', pageTitle ])
+    .directive('sideNavigation', [ '$timeout', sideNavigation ])
+    .directive('iboxTools', [ '$timeout', iboxTools])
+    .directive('minimalizaSidebar', [ '$timeout', minimalizaSidebar])
+    .directive('iboxToolsFullScreen', [ '$timeout', iboxToolsFullScreen]);

@@ -5,7 +5,7 @@ function config($stateProvider, $urlRouterProvider) {
       controllerAs: 'dashboard',
       data: { pageTitle: 'Chart.js' },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
+        loadPlugin: [ '$ocLazyLoad', function ($ocLazyLoad) {
           return $ocLazyLoad.load([
             {
               files: ['js/plugins/chartJs/Chart.min.js']
@@ -32,7 +32,7 @@ function config($stateProvider, $urlRouterProvider) {
               files: ['js/bootstrap/angular-bootstrap-checkbox.js']
             }
           ]);
-        }
+        }]
       },
       templateUrl: "components/dashboard/dashboard.html",
       url: "/dashboard",
@@ -41,4 +41,4 @@ function config($stateProvider, $urlRouterProvider) {
 
 angular
   .module('app')
-  .config(config);
+  .config([ '$stateProvider', '$urlRouterProvider', config ]);
