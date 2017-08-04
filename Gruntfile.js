@@ -215,5 +215,4 @@ module.exports = function (grunt) {
         'usemin',
         'htmlmin'
     ]);
-
 };
