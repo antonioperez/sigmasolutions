@@ -1,3 +1,7 @@
+angular
+  .module('app')
+  .config([ '$stateProvider', '$urlRouterProvider', config ]);
+
 function config($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('index.dashboard', {
@@ -38,7 +42,3 @@ function config($stateProvider, $urlRouterProvider) {
       url: "/dashboard",
     })
 }
-
-angular
-  .module('app')
-  .config([ '$stateProvider', '$urlRouterProvider', config ]);

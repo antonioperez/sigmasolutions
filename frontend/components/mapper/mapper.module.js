@@ -1,3 +1,7 @@
+angular
+    .module('app')
+    .config([ '$stateProvider', config ]);
+
 function config($stateProvider) {
     $stateProvider
 
@@ -7,6 +11,3 @@ function config($stateProvider) {
             data: { pageTitle: 'Map Viewer' }
         })
 }
-angular
-    .module('app')
-    .config([ '$stateProvider', config ]);

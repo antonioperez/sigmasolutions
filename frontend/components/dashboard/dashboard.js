@@ -1,3 +1,10 @@
+angular
+  .module('app')
+  .controller('DashboardCtrl', [
+    '$http',
+    Ctrl
+  ]);
+
 function Ctrl ($http) {
     var vm = this;
 
@@ -213,10 +220,3 @@ function Ctrl ($http) {
       return new Date(year, month - 1, day).getTime();
     }
 };
-
-angular
-  .module('app')
-  .controller('DashboardCtrl', [
-    '$http',
-    Ctrl
-  ])

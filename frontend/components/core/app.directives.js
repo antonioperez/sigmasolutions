@@ -1,12 +1,11 @@
-/**
- * INSPINIA - Responsive Admin Theme
- *
- */
+angular
+    .module('app')
+    .directive('pageTitle', [ '$rootScope', '$timeout', pageTitle ])
+    .directive('sideNavigation', [ '$timeout', sideNavigation ])
+    .directive('iboxTools', [ '$timeout', iboxTools])
+    .directive('minimalizaSidebar', [ '$timeout', minimalizaSidebar])
+    .directive('iboxToolsFullScreen', [ '$timeout', iboxToolsFullScreen]);
 
-
-/**
- * pageTitle - Directive for set Page title - mata title
- */
 function pageTitle($rootScope, $timeout) {
     return {
         link: function(scope, element) {
@@ -164,17 +163,3 @@ function iboxToolsFullScreen($timeout) {
         }]
     };
 }
-
-
-
-/**
- *
- * Pass all functions into module
- */
-angular
-    .module('app')
-    .directive('pageTitle', [ '$rootScope', '$timeout', pageTitle ])
-    .directive('sideNavigation', [ '$timeout', sideNavigation ])
-    .directive('iboxTools', [ '$timeout', iboxTools])
-    .directive('minimalizaSidebar', [ '$timeout', minimalizaSidebar])
-    .directive('iboxToolsFullScreen', [ '$timeout', iboxToolsFullScreen]);

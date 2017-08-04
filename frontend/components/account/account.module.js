@@ -1,3 +1,7 @@
+angular
+    .module('app')
+    .config([ '$stateProvider', config]);
+    
 function config($stateProvider) {
     $stateProvider
 
@@ -17,6 +21,3 @@ function config($stateProvider) {
             data: { pageTitle: 'Register', specialClass: 'gray-bg' }
         })
 }
-angular
-    .module('app')
-    .config([ '$stateProvider', config]);
