@@ -65,7 +65,7 @@ function iboxTools($timeout) {
         restrict: 'A',
         scope: true,
         templateUrl: 'components/layout/ibox_tools.html',
-        controller: function ($scope, $element) {
+        controller: [ '$scope', '$element', function ($scope, $element) {
             // Function for collapse ibox
             $scope.showhide = function () {
                 var ibox = $element.closest('div.ibox');
@@ -85,7 +85,7 @@ function iboxTools($timeout) {
                     var ibox = $element.closest('div.ibox');
                     ibox.remove();
                 }
-        }
+        }]
     };
 };
 
@@ -96,7 +96,7 @@ function minimalizaSidebar($timeout) {
     return {
         restrict: 'A',
         template: '<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="" ng-click="minimalize()"><i class="fa fa-bars"></i></a>',
-        controller: function ($scope, $element) {
+        controller: [ '$scope', '$element', function ($scope, $element) {
             $scope.minimalize = function () {
                 $("body").toggleClass("mini-navbar");
                 if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
@@ -118,7 +118,7 @@ function minimalizaSidebar($timeout) {
                     $('#side-menu').removeAttr('style');
                 }
             }
-        }
+        }]
     };
 };
 
@@ -130,7 +130,7 @@ function iboxToolsFullScreen($timeout) {
         restrict: 'A',
         scope: true,
         templateUrl: 'components/layout/ibox_tools_full_screen.html',
-        controller: function ($scope, $element) {
+        controller:[ '$scope', '$element', function ($scope, $element) {
             // Function for collapse ibox
             $scope.showhide = function () {
                 var ibox = $element.closest('div.ibox');
@@ -161,7 +161,7 @@ function iboxToolsFullScreen($timeout) {
                     $(window).trigger('resize');
                 }, 100);
             }
-        }
+        }]
     };
 }
 
