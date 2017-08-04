@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
     // Configurable paths for the app
     var appConfig = {
-        app: 'frontend',
+        app: 'app',
         dist: 'dist'
     };
 
@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         // The grunt server settings
         connect: {
             options: {
-                port: 8080,
+                port: 9000,
                 hostname: 'localhost',
                 livereload: 35729
             },
@@ -56,14 +56,14 @@ module.exports = function (grunt) {
                     optimization: 2
                 },
                 files: {
-                    "frontend/styles/style.css": "frontend/less/style.less"
+                    "app/styles/style.css": "app/less/style.less"
                 }
             }
         },
         // Watch for changes in live edit
         watch: {
             styles: {
-                files: ['frontend/less/**/*.less'],
+                files: ['app/less/**/*.less'],
                 tasks: ['less', 'copy:styles'],
                 options: {
                     nospawn: true,
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                 },
             },
             js: {
-                files: ['<%= inspinia.app %>/components/{,*/}*.js'],
+                files: ['<%= inspinia.app %>/scripts/{,*/}*.js'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
@@ -122,7 +122,7 @@ module.exports = function (grunt) {
                             '*.{ico,png,txt}',
                             '.htaccess',
                             '*.html',
-                            'components/{,*/}*.html',
+                            'views/{,*/}*.html',
                             'styles/patterns/*.*',
                             'img/{,*/}*.*'
                         ]
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= inspinia.dist %>/components/{,*/}*.js',
+                    '<%= inspinia.dist %>/scripts/{,*/}*.js',
                     '<%= inspinia.dist %>/styles/{,*/}*.css',
                     '<%= inspinia.dist %>/styles/fonts/*'
                 ]
@@ -172,13 +172,13 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= inspinia.dist %>',
-                    src: ['*.html', 'components/{,*/}*.html'],
+                    src: ['*.html', 'views/{,*/}*.html'],
                     dest: '<%= inspinia.dist %>'
                 }]
             }
         },
         useminPrepare: {
-            html: 'frontend/index.html',
+            html: 'app/index.html',
             options: {
                 dest: 'dist'
             }
