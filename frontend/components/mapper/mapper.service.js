@@ -18,7 +18,7 @@ angular
             $("#"+mapId).css('height', "500px");
 
             var map = L.map(mapId).setView([36.8, -120], zoom);
-            L.esri.basemapLayer("Topographic").addTo(map);
+            var layer = L.esri.basemapLayer("Topographic").addTo(map);
 
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;
