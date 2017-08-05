@@ -18,8 +18,6 @@ angular
             self.map = L.map(mapId).setView([36.8, -120], zoom);
             L.esri.basemapLayer("Topographic").addTo(self.map);
 
-
-
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;
             self.addDrawingOptions = addDrawingOptions;
@@ -33,10 +31,21 @@ angular
 
         self.loadShapefile = function (zipPath) {
             shp(zipPath).then(function (geojson) {
+                geoj = geojson.features;
 
-                console.log(geojson.features[0]);
+                //dirty fix to not all certain keys to pass. will need to pass in obj with callback and template. 
+                var stateCheck = geoj[0].properties["STATE"];
+                if (stateCheck) {
+                    for (var i in geoj) {
+                        stateCheck = geoj[i].properties["STATE"];
+                        if (stateCheck != "CA") {
+                            geoj[i] = undefined;
+                        }
+                    }
+                }
+                var geoj = geoj.filter(function(val){return val});
                 //function to display popup
-                var featuresLayer = L.geoJSON(geojson.features, {
+                var featuresLayer = L.geoJSON(geoj, {
                     style: self.backgroundOverlayStyle,
                     onEachFeature: function (feature, layer) {
                         if (self.popupContent) {
@@ -135,13 +144,6 @@ angular
             //function to display popup
             var props = feature.properties;
 
-            //dirty fix to not all certain keys to pass. will need to pass in obj with callback and template. 
-            
-            if (props.STATE != "CA") {
-                return false;
-            }
-
-            console.log(props.STATE == "CA");
             //get values;
             var template = self.popupContent;
             var keys = template.match(/[^{]+(?=\}})/g);
