@@ -13,7 +13,8 @@
                 VIEW AND CREATE YOUR SHAPE FILES.
 
                 <div class="progress" id="map-progress-container">
-                    <div class="progress-bar progress-bar-striped active" id="js-map-progress-bar" role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    <div class="progress-bar progress-bar-striped active" id="js-map-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                        aria-valuemax="100" style="width:0%">
                     </div>
                 </div>
 
@@ -28,6 +29,14 @@
 
                 <script src="components/mapper/downloader.js"></script>
                 <script src="components/mapper/map.js"></script>
+                <script>
+                    var background = {
+                        "color": "#A9A9A9",
+                        "weight": 2,
+                        "opacity": 0.65
+                    };
+                    loadShapefile("B118_CA_GroundwaterBasins.zip", background);
+                </script>
             </div>
         </div>
     </div>
