@@ -3,17 +3,17 @@ angular
     .service('mapservice', function ($http) {
 
         var self = this;
+        
         var CONVERTER_URL = "http://sgma.ecoverse.io/mapper/convertJson";
-        self.map = L.map('map').setView([36.8, -120], 10);
-        L.esri.basemapLayer("Topographic").addTo(self.map);
-
         self.backgroundOverlayStyle = {};
         self.popupContent = null;
         self.searchKey = null;
 
-
-        self.generateMap = function (zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
+        self.generateMap = function (mapId, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
             //after map is loaded with the data. We need style it. 
+
+            self.map = L.map(mapId).setView([36.8, -120], 10);
+            L.esri.basemapLayer("Topographic").addTo(self.map);
 
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;

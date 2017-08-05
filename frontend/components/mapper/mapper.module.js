@@ -4,7 +4,6 @@ angular
 
 function config($stateProvider) {
     $stateProvider
-
         .state('index.basinmapper', {
             controller: 'MapCtrl',
             controllerAs: 'map',

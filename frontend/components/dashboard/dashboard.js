@@ -1,17 +1,33 @@
 angular
   .module('app')
   .controller('DashboardCtrl', [
-    '$http',
-    Ctrl
-  ]);
+    '$http', '$scope', 'mapservice',
+    function ($http, $scope, mapservice) {
 
-function Ctrl ($http) {
-    var vm = this;
+      var vm = this;
 
-    vm.flotData = [
-      {
+      var mapBackground = {
+        "color": "#A9A9A9",
+        "weight": 2,
+        "opacity": 0.65
+      };
+
+      var popupContent = "<p>" +
+        "Basin ID: {{Basin_ID}} <br>" +
+        "Basin Name: {{Basin_Name}} <br>" +
+        "Basin_Su_1: {{Basin_Su_1}} <br>" +
+        "Region:  {{Region_Off}} <br>" +
+        "Report: {{Report}} <br>" + "</p>";
+
+      // this.basinsmap = mapservice.generateMap(id, "B118CAGroundwaterBasins.zip", mapBackground,
+      //   popupContent, "Basin_Su_1", false
+      // );
+
+      vm.flotData = [{
         label: '',
-        grow:{stepMode:'linear'},
+        grow: {
+          stepMode: 'linear'
+        },
         data: [
           [gd(2012, 1, 1), 7],
           [gd(2012, 1, 2), 6],
@@ -52,8 +68,7 @@ function Ctrl ($http) {
           show: true,
           fill: true,
           fillColor: {
-            colors: [
-              {
+            colors: [{
                 opacity: 0.2
               },
               {
@@ -62,161 +77,157 @@ function Ctrl ($http) {
             ]
           }
         }
-      }
-    ];
+      }];
 
-    vm.flotOptions = {
-      grid: {
-        hoverable: true,
-        clickable: true,
-        tickColor: '#d5d5d5',
-        borderWidth: 0,
-        color: '#d5d5d5'
-      },
-      colors: ['#1ab394', '#464f88'],
-      tooltip: true,
-      xaxis: {
-        mode: 'time',
-        tickSize: [3, 'day'],
-        tickLength: 0,
-        axisLabel: 'Date',
-        axisLabelUseCanvas: true,
-        axisLabelFontSizePixels: 12,
-        axisLabelFontFamily: 'Arial',
-        axisLabelPadding: 10,
-        color: '#d5d5d5'
-      },
-      yaxes: [
-        {
-          position: 'left',
-          max: 1070,
-          color: '#d5d5d5',
+      vm.flotOptions = {
+        grid: {
+          hoverable: true,
+          clickable: true,
+          tickColor: '#d5d5d5',
+          borderWidth: 0,
+          color: '#d5d5d5'
+        },
+        colors: ['#1ab394', '#464f88'],
+        tooltip: true,
+        xaxis: {
+          mode: 'time',
+          tickSize: [3, 'day'],
+          tickLength: 0,
+          axisLabel: 'Date',
           axisLabelUseCanvas: true,
           axisLabelFontSizePixels: 12,
           axisLabelFontFamily: 'Arial',
-          axisLabelPadding: 3
+          axisLabelPadding: 10,
+          color: '#d5d5d5'
+        },
+        yaxes: [{
+            position: 'left',
+            max: 1070,
+            color: '#d5d5d5',
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Arial',
+            axisLabelPadding: 3
+          },
+          {
+            position: 'right',
+            color: '#d5d5d5',
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Arial',
+            axisLabelPadding: 67
+          }
+        ],
+        legend: {
+          noColumns: 1,
+          labelBoxBorderColor: '#d5d5d5',
+          position: 'nw'
+        }
+      };
+
+      vm.barOptions = {
+        scaleBeginAtZero: true,
+        scaleShowGridLines: false,
+        scaleGridLineColor: 'rgba(0,0,0,.05)',
+        scaleGridLineWidth: 1,
+        barShowStroke: true,
+        barStrokeWidth: 2,
+        barValueSpacing: 5,
+        barDatasetSpacing: 1
+      };
+
+      vm.barData = {
+        labels: ["01", "02", "03", "04", "05", "06", "07"],
+        datasets: [{
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+          },
+          {
+            label: "My Second dataset",
+            fillColor: "rgba(26,179,148,0.5)",
+            strokeColor: "rgba(26,179,148,0.8)",
+            highlightFill: "rgba(26,179,148,0.75)",
+            highlightStroke: "rgba(26,179,148,1)",
+            data: [28, 48, 40, 19, 86, 27, 90]
+          }
+        ]
+      };
+
+      vm.doughnutData = [{
+          value: 300,
+          color: "#a3e1d4",
+          highlight: "#1ab394",
+          label: "App"
         },
         {
-          position: 'right',
-          color: '#d5d5d5',
-          axisLabelUseCanvas: true,
-          axisLabelFontSizePixels: 12,
-          axisLabelFontFamily: 'Arial',
-          axisLabelPadding: 67
-        }
-      ],
-      legend: {
-        noColumns: 1,
-        labelBoxBorderColor: '#d5d5d5',
-        position: 'nw'
-      }
-    };
-
-    vm.barOptions = {
-      scaleBeginAtZero : true,
-      scaleShowGridLines : false,
-      scaleGridLineColor : 'rgba(0,0,0,.05)',
-      scaleGridLineWidth : 1,
-      barShowStroke : true,
-      barStrokeWidth : 2,
-      barValueSpacing : 5,
-      barDatasetSpacing : 1
-    };
-
-    vm.barData = {
-      labels: ["01", "02", "03", "04", "05", "06", "07"],
-      datasets: [
-        {
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.5)",
-          strokeColor: "rgba(220,220,220,0.8)",
-          highlightFill: "rgba(220,220,220,0.75)",
-          highlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
+          value: 50,
+          color: "#dedede",
+          highlight: "#1ab394",
+          label: "Software"
         },
         {
-          label: "My Second dataset",
-          fillColor: "rgba(26,179,148,0.5)",
-          strokeColor: "rgba(26,179,148,0.8)",
-          highlightFill: "rgba(26,179,148,0.75)",
-          highlightStroke: "rgba(26,179,148,1)",
-          data: [28, 48, 40, 19, 86, 27, 90]
+          value: 100,
+          color: "#A4CEE8",
+          highlight: "#1ab394",
+          label: "Laptop"
         }
-      ]
-    };
+      ];
 
-    vm.doughnutData = [
-      {
-        value: 300,
-        color:"#a3e1d4",
-        highlight: "#1ab394",
-        label: "App"
-      },
-      {
-        value: 50,
-        color: "#dedede",
-        highlight: "#1ab394",
-        label: "Software"
-      },
-      {
-        value: 100,
-        color: "#A4CEE8",
-        highlight: "#1ab394",
-        label: "Laptop"
+      vm.doughnutOptions = {
+        segmentShowStroke: true,
+        segmentStrokeColor: "#fff",
+        segmentStrokeWidth: 2,
+        percentageInnerCutout: 45, // This is 0 for Pie charts
+        animationSteps: 100,
+        animationEasing: "easeOutBounce",
+        animateRotate: true,
+        animateScale: false
+      };
+
+      vm.notices = [{
+          name: 'District No. 3',
+          basin: 'Modesto',
+          basinNumber: 73430,
+          manager: 'Cecilia Herrera',
+          email: 'mante.kylie@yahoo.com',
+          date: '11-06-2017',
+          numbers: '63'
+        },
+        {
+          name: 'District No. 32',
+          basin: 'Modesto',
+          basinNumber: 37675,
+          manager: 'Bobby Park',
+          email: 'estevan.beatty@gmail.com',
+          date: '03-20-2017',
+          numbers: '40'
+        },
+        {
+          name: 'District No. 78',
+          basin: 'Turlock',
+          basinNumber: 35950,
+          manager: 'Isaac Colon',
+          email: 'lefler_janice@stark.tv',
+          date: '06-06-2017',
+          numbers: '9'
+        },
+        {
+          name: 'District No. 56',
+          basin: 'Merced',
+          basinNumber: 7817,
+          manager: 'Charlier Miller',
+          email: 'cronin_karl@yahoo.com',
+          date: '05-20-2017',
+          numbers: '55'
+        }
+      ];
+
+      function gd(year, month, day) {
+        return new Date(year, month - 1, day).getTime();
       }
-    ];
-
-    vm.doughnutOptions = {
-      segmentShowStroke : true,
-      segmentStrokeColor : "#fff",
-      segmentStrokeWidth : 2,
-      percentageInnerCutout : 45, // This is 0 for Pie charts
-      animationSteps : 100,
-      animationEasing : "easeOutBounce",
-      animateRotate : true,
-      animateScale : false
-    };
-
-    vm.notices = [
-      {
-        name: 'District No. 3',
-        basin: 'Modesto',
-        basinNumber: 73430,
-        manager: 'Cecilia Herrera',
-        email: 'mante.kylie@yahoo.com',
-        date: '11-06-2017',
-        numbers: '63'
-      },
-      {
-        name: 'District No. 32',
-        basin: 'Modesto',
-        basinNumber: 37675,
-        manager: 'Bobby Park',
-        email: 'estevan.beatty@gmail.com',
-        date: '03-20-2017',
-        numbers: '40'
-      },
-      {
-        name: 'District No. 78',
-        basin: 'Turlock',
-        basinNumber: 35950,
-        manager: 'Isaac Colon',
-        email: 'lefler_janice@stark.tv',
-        date: '06-06-2017',
-        numbers: '9'
-      },
-      {
-        name: 'District No. 56',
-        basin: 'Merced',
-        basinNumber: 7817,
-        manager: 'Charlier Miller',
-        email: 'cronin_karl@yahoo.com',
-        date: '05-20-2017',
-        numbers: '55'
-      }
-    ];
-
-    function gd(year, month, day) {
-      return new Date(year, month - 1, day).getTime();
     }
-};
+  ]);
