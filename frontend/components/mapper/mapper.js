@@ -4,7 +4,6 @@ angular
         '$http', '$scope', 'mapservice',
         function ($http, $scope, mapservice) {
 
-            var bleh = "fdsjkafhdsjkfhaks";
             var background = {
                 "color": "#A9A9A9",
                 "weight": 2,
@@ -17,6 +16,7 @@ angular
                 "Basin_Su_1: {{Basin_Su_1}} <br>" +
                 "Region:  {{Region_Off}} <br>" +
                 "Report: {{Report}} <br>" + "</p>";
+            
 
             this.basinsmap = mapservice.generateMap("B118CAGroundwaterBasins.zip", background, popupContent, "Basin_Su_1");
         }
