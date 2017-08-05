@@ -57,13 +57,12 @@ angular
                 //end data to map. 
 
                 if (self.searchKey) {
-                    self.addSearchControls(self.searchKey, featuresLayer);
+                    self.addSearchControls(map, self.searchKey, featuresLayer);
                 }
 
                 //create mapping drawing functionality
                 if (self.addDrawingOptions) {
-                    
-                    self.addDrawControls();
+                    self.addDrawControls(map, featuresLayer);
                 }
                 //end drawing functionality
 
@@ -162,7 +161,7 @@ angular
             layer.bindPopup(template);
         };
 
-        self.addDrawControls = function () {
+        self.addDrawControls = function (map, featuresLayer) {
             //create mapping drawing functionality
             var drawnItems = new L.FeatureGroup();
             map.addLayer(drawnItems);
@@ -233,7 +232,7 @@ angular
             });
         };
 
-        self.addSearchControls = function (searchKey, featuresLayer) {
+        self.addSearchControls = function (map, searchKey, featuresLayer) {
 
             var searchControl = new L.Control.Search({
                 layer: featuresLayer,
