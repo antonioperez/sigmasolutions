@@ -9,11 +9,16 @@ angular
         self.popupContent = null;
         self.searchKey = null;
 
-        self.generateMap = function (mapId, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
+        self.generateMap = function (mapId, zoom, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
             //after map is loaded with the data. We need style it. 
 
-            self.map = L.map(mapId).setView([36.8, -120], 10);
+            $("#"+mapId).css('width', "100%");
+            $("#"+mapId).css('height', "500px");
+
+            self.map = L.map(mapId).setView([36.8, -120], zoom);
             L.esri.basemapLayer("Topographic").addTo(self.map);
+
+
 
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;
@@ -29,6 +34,7 @@ angular
         self.loadShapefile = function (zipPath) {
             shp(zipPath).then(function (geojson) {
 
+                console.log(geojson.features[0]);
                 //function to display popup
                 var featuresLayer = L.geoJSON(geojson.features, {
                     style: self.backgroundOverlayStyle,
@@ -124,10 +130,18 @@ angular
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.send($.param(payload));
         }
+
         self.onEachFeature = function (feature, layer) {
             //function to display popup
             var props = feature.properties;
 
+            //dirty fix to not all certain keys to pass. will need to pass in obj with callback and template. 
+            
+            if (props.STATE != "CA") {
+                return false;
+            }
+
+            console.log(props.STATE == "CA");
             //get values;
             var template = self.popupContent;
             var keys = template.match(/[^{]+(?=\}})/g);
