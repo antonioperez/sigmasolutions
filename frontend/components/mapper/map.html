@@ -6,6 +6,8 @@
     }
 </style>
 
+
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -22,21 +24,11 @@
                     <label for="js-fileName">Output Name</label>
                     <input type="text" class="form-control" id="js-fileName" placeholder="your file name">
                     <p id="fileNameHelpBlock" class="form-text text-muted">
-                        Optional. Filename will be random if empty.
+                        {{bleh}}
                     </p>
                 </div>
                 <div class="col-xs-12" id="map"></div>
 
-                <script src="components/mapper/downloader.js"></script>
-                <script src="components/mapper/map.js"></script>
-                <script>
-                    var background = {
-                        "color": "#A9A9A9",
-                        "weight": 2,
-                        "opacity": 0.65
-                    };
-                    loadShapefile("B118_CA_GroundwaterBasins.zip", background);
-                </script>
             </div>
         </div>
     </div>

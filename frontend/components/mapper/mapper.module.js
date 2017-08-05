@@ -6,8 +6,12 @@ function config($stateProvider) {
     $stateProvider
 
         .state('index.mapper', {
-            url: "/mapper",
-            templateUrl: "components/mapper/viewer.html",
-            data: { pageTitle: 'Map Viewer' }
+            controller: 'MapCtrl',
+            controllerAs: 'map',
+            url: "/maps",
+            templateUrl: "components/mapper/map.html",
+            data: { 
+                pageTitle: 'Maps'
+            }
         })
 }
