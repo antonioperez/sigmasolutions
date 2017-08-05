@@ -12,10 +12,23 @@ angular
         "opacity": 0.65
       };
 
-      this.getWellMap = function () {
+      // this.getAquaiferMap = function () {
 
-        var wellPopupTemplate = "<p>" +
-          "Station:  {{SITEID}} <br>" +
+      //   var popupTemplate = "<p>" +
+      //     "AQ CODE:  {{AQ_CODE}} <br>" +
+      //     "AQ NAME: {{AQ_NAME}} <br>" +
+      //     "ROCK NAME: {{ROCK_NAME}} <br>" +
+      //     "ROCK TYPE: {{ROCK_TYPE}} <br>" +"</p>";
+          
+      //   this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "aquifers.zip", mapBackground,
+      //     popupTemplate, null, false
+      //   );
+      // }
+      // this.getAquaiferMap();
+
+      this.getWellMap = function () {
+        var popupTemplate = "<p>" +
+          "Site ID:  {{SITEID}} <br>" +
           "County: {{COUNTY_NM}} {{STATE}} <br>" +
           "Date: {{DATA_DATE}} <br>" +
           "Percentile: {{PERCENTILE}} <br>" +
@@ -23,14 +36,13 @@ angular
           "Station:  {{SITEID}} <br>" +
           "Station Number: {{STATION_NM}} <br>" + "</p>";
           
-        this.wellmap = mapservice.generateMap("js-well-map", 7, "wells.zip", mapBackground,
-          wellPopupTemplate, null, false
+        this.wellmap = mapservice.generateMap("js-well-map", 7, "rtn_wells.zip", mapBackground,
+          popupTemplate, null, false
         );
-        //return deferred.promise;
       }
 
-
       this.getWellMap();
+     
 
       vm.flotData = [{
         label: '',
