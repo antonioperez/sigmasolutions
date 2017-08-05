@@ -5,10 +5,10 @@ angular
 function config($stateProvider) {
     $stateProvider
 
-        .state('index.mapper', {
+        .state('index.basinmapper', {
             controller: 'MapCtrl',
             controllerAs: 'map',
-            url: "/maps",
+            url: "/basinmapper",
             templateUrl: "components/mapper/map.html",
             data: { 
                 pageTitle: 'Maps'
