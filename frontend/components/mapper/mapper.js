@@ -19,7 +19,7 @@ angular
                 "Region:  {{Region_Off}} <br>" +
                 "Report: {{Report}} <br>" + "</p>";
             
-            this.basinsmap = mapservice.generateMap("map", 12, "B118CAGroundwaterBasins.zip", background, 
+            this.basinsmap = mapservice.generateMap("map", 11, "B118CAGroundwaterBasins.zip", background, 
                 popupContent, "Basin_Su_1", true
             );
         }
