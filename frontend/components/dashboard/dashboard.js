@@ -22,7 +22,7 @@ angular
           "ROCK NAME: {{ROCK_NAME}} <br>" +
           "ROCK TYPE: {{ROCK_TYPE}} <br>" +"</p>";
           
-        this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "aquifers.zip", mapBackground,
+        this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "data/aquifers.zip", mapBackground,
           popupTemplate, null, false
         );
       }
@@ -38,7 +38,7 @@ angular
           "Station:  {{SITEID}} <br>" +
           "Station Number: {{STATION_NM}} <br>" + "</p>";
           
-        this.wellmap = mapservice.generateMap("js-well-map", 7, "rtn_wells.zip", mapBackground,
+        this.wellmap = mapservice.generateMap("js-well-map", 7, "data/rtn_wells.zip", mapBackground,
           popupTemplate, null, false
         );
       }

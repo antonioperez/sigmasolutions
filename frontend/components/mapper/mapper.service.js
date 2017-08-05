@@ -95,7 +95,9 @@ angular
                     }
 
                     //filename needs the .zip in order to get a zip file. TODO: better check in case of multiple. 
-                    filename += ".zip"
+                    if (filename.indexOf(".zip" < 0)) {
+                        filename += ".zip"
+                    }
 
                     var type = xhr.getResponseHeader('Content-Type');
                     var blob = new Blob([this.response], {
