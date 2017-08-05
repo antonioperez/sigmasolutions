@@ -6,7 +6,7 @@ angular
         
         var CONVERTER_URL = "http://sgma.ecoverse.io/mapper/convertJson";
         self.backgroundOverlayStyle = {};
-        self.popupContent = null;
+
         self.searchKey = null;
 
         self.generateMap = function (mapId, zoom, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
@@ -15,21 +15,18 @@ angular
             $("#"+mapId).css('width', "100%");
             $("#"+mapId).css('height', "500px");
 
-            self.map = L.map(mapId).setView([36.8, -120], zoom);
-            L.esri.basemapLayer("Topographic").addTo(self.map);
+            var map = L.map(mapId).setView([36.8, -120], zoom);
+            L.esri.basemapLayer("Topographic").addTo(map);
 
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;
             self.addDrawingOptions = addDrawingOptions;
 
-            if (popupContent) {
-                self.popupContent = popupContent;
-            }
-            self.loadShapefile(zipPath);
-            return self.map;
+            map = self.loadShapefile(map, zipPath, popupContent);
+            return map;
         }
 
-        self.loadShapefile = function (zipPath) {
+        self.loadShapefile = function (map, zipPath, popupContent) {
             shp(zipPath).then(function (geojson) {
                 geoj = geojson.features;
 
@@ -49,12 +46,12 @@ angular
                 var featuresLayer = L.geoJSON(geoj, {
                     style: self.backgroundOverlayStyle,
                     onEachFeature: function (feature, layer) {
-                        if (self.popupContent) {
-                            self.onEachFeature(feature, layer);
+                        if (popupContent) {
+                            self.onEachFeature(feature, layer, popupContent);
                         }
                     }
                 });
-                self.map.addLayer(featuresLayer);
+                map.addLayer(featuresLayer);
                 //end data to map. 
 
                 if (self.searchKey) {
@@ -141,12 +138,12 @@ angular
             xhr.send($.param(payload));
         }
 
-        self.onEachFeature = function (feature, layer) {
+        self.onEachFeature = function (feature, layer, popupContent) {
             //function to display popup
             var props = feature.properties;
 
             //get values;
-            var template = self.popupContent;
+            var template = popupContent;
             var keys = template.match(/[^{]+(?=\}})/g);
             if (keys.length > 0) {
                 for (var k in keys) {
@@ -164,7 +161,7 @@ angular
         self.addDrawControls = function () {
             //create mapping drawing functionality
             var drawnItems = new L.FeatureGroup();
-            self.map.addLayer(drawnItems);
+            map.addLayer(drawnItems);
             var drawControl = new L.Control.Draw({
                 position: 'topright',
                 draw: {
@@ -178,17 +175,17 @@ angular
                     remove: true
                 }
             });
-            self.map.addControl(drawControl);
+            map.addControl(drawControl);
             //end drawing functionality
 
-            self.map.on(L.Draw.Event.CREATED, function (e) {
+            map.on(L.Draw.Event.CREATED, function (e) {
                 //custom feature is created on map. Add it or do more with it. 
                 var type = e.layerType;
                 var layer = e.layer;
                 drawnItems.addLayer(layer);
             });
 
-            self.map.on(L.Draw.Event.EDITED, function (e) {
+            map.on(L.Draw.Event.EDITED, function (e) {
                 var layers = e.layers;
                 var countOfEditedLayers = 0;
                 layers.eachLayer(function (layer) {
@@ -260,7 +257,7 @@ angular
                 });
             });
 
-            self.map.addControl(searchControl);
+            map.addControl(searchControl);
             //end search options
         }
     });

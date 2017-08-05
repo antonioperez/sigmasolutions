@@ -12,19 +12,19 @@ angular
         "opacity": 0.65
       };
 
-      // this.getAquaiferMap = function () {
+      this.getAquaiferMap = function () {
 
-      //   var popupTemplate = "<p>" +
-      //     "AQ CODE:  {{AQ_CODE}} <br>" +
-      //     "AQ NAME: {{AQ_NAME}} <br>" +
-      //     "ROCK NAME: {{ROCK_NAME}} <br>" +
-      //     "ROCK TYPE: {{ROCK_TYPE}} <br>" +"</p>";
+        var popupTemplate = "<p>" +
+          "AQ CODE:  {{AQ_CODE}} <br>" +
+          "AQ NAME: {{AQ_NAME}} <br>" +
+          "ROCK NAME: {{ROCK_NAME}} <br>" +
+          "ROCK TYPE: {{ROCK_TYPE}} <br>" +"</p>";
           
-      //   this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "aquifers.zip", mapBackground,
-      //     popupTemplate, null, false
-      //   );
-      // }
-      // this.getAquaiferMap();
+        this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "aquifers.zip", mapBackground,
+          popupTemplate, null, false
+        );
+      }
+      this.getAquaiferMap();
 
       this.getWellMap = function () {
         var popupTemplate = "<p>" +
