@@ -18,6 +18,8 @@ angular
                 "Report: {{Report}} <br>" + "</p>";
             
 
-            this.basinsmap = mapservice.generateMap("B118CAGroundwaterBasins.zip", background, popupContent, "Basin_Su_1");
+            this.basinsmap = mapservice.generateMap("B118CAGroundwaterBasins.zip", background, 
+                popupContent, "Basin_Su_1", true
+            );
         }
     ]);

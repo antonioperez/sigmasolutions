@@ -11,63 +11,13 @@ angular
         self.popupContent = null;
         self.searchKey = null;
 
-        self.onEachFeature = function (feature, layer) {
-            //function to display popup
-            var props = feature.properties;
 
-            //get values;
-            var template = self.popupContent;
-            var keys = template.match(/[^{]+(?=\}})/g);
-            if (keys.length > 0) {
-                for (var k in keys) {
-                    var key = keys[k];
-                    template = template.replace("{{"+key+"}}", props[key]);
-                }
-            }
-
-            if (feature.properties && feature.properties.popupContent) {
-                template += feature.properties.popupContent;
-            }
-            layer.bindPopup(template);
-        };
-
-        self.addSearchControls = function (searchKey, featuresLayer) {
-
-            var searchControl = new L.Control.Search({
-                layer: featuresLayer,
-                propertyName: searchKey,
-                marker: false,
-                moveToLocation: function (latlng, title, map) {
-                    var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-                    map.setView(latlng, zoom);
-                }
-            });
-
-            searchControl.on('search:locationfound', function (e) {
-                ////if a search is found. Highlight the area
-                e.layer.setStyle({
-                    fillColor: '#3f0',
-                    color: '#0f0'
-                });
-                if (e.layer._popup) {
-                    e.layer.openPopup();
-                }
-            }).on('search:collapsed', function (e) {
-                featuresLayer.eachLayer(function (layer) {
-                    //restore original background color
-                    featuresLayer.resetStyle(layer);
-                });
-            });
-
-            self.map.addControl(searchControl);
-            //end search options
-        }
-
-        self.generateMap = function (zipPath, backgroundOptions, popupContent, searchKey) {
+        self.generateMap = function (zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
             //after map is loaded with the data. We need style it. 
 
             self.backgroundOverlayStyle = backgroundOptions;
             self.searchKey = searchKey;
+            self.addDrawingOptions = addDrawingOptions;
 
             if (popupContent) {
                 self.popupContent = popupContent;
@@ -96,76 +46,15 @@ angular
                 }
 
                 //create mapping drawing functionality
-                var drawnItems = new L.FeatureGroup();
-                self.map.addLayer(drawnItems);
-                var drawControl = new L.Control.Draw({
-                    position: 'topright',
-                    draw: {
-                        polyline: true,
-                        polygon: true,
-                        circle: false,
-                        marker: true
-                    },
-                    edit: {
-                        featureGroup: drawnItems,
-                        remove: true
-                    }
-                });
-                self.map.addControl(drawControl);
+                if (self.addDrawingOptions) {
+                    
+                    self.addDrawControls();
+                }
                 //end drawing functionality
 
-                self.map.on(L.Draw.Event.CREATED, function (e) {
-                    //custom feature is created on map. Add it or do more with it. 
-                    var type = e.layerType;
-                    var layer = e.layer;
-                    drawnItems.addLayer(layer);
-                });
-
-                self.map.on(L.Draw.Event.EDITED, function (e) {
-                    var layers = e.layers;
-                    var countOfEditedLayers = 0;
-                    layers.eachLayer(function (layer) {
-                        countOfEditedLayers++;
-                    });
-
-                    //TO DO: Need to add edited features to current geojson
-                    var data = featuresLayer.toGeoJSON();
-                    data = JSON.stringify(data);
-                    filename = $("#js-fileName").val();
-                    console.log(filename);
-
-                    payload = {
-                        json: data,
-                        outputName: filename
-                    }
-
-                    //animate progress bar
-                    progressBar = $("#js-map-progress-bar");
-                    doneProcessing = null;
-
-                    if (progressBar) {
-                        var percentVal = 0;
-                        var interval = setInterval(function () {
-                            if (percentVal <= 100) {
-                                progressBar.css('width', percentVal + "%").attr('aria-valuenow', percentVal);
-                                percentVal += .5;
-                                percentVal = Math.round(percentVal);
-                            } else if (percentVal > 100) {
-                                percentVal = 0;
-                            }
-                        }, 50);
-
-                        doneProcessing = function () {
-                            clearInterval(interval);
-                            progressBar.css('width', "0%").attr('aria-valuenow', 0);
-                            console.log("test callback");
-                        }
-                    }
-                    self.downloadFile(CONVERTER_URL, payload, doneProcessing);
-                });
             });
         }
-        
+
         self.genGuid = function () {
             var date = new Date().getTime();
             var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
@@ -234,5 +123,127 @@ angular
             };
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.send($.param(payload));
+        }
+        self.onEachFeature = function (feature, layer) {
+            //function to display popup
+            var props = feature.properties;
+
+            //get values;
+            var template = self.popupContent;
+            var keys = template.match(/[^{]+(?=\}})/g);
+            if (keys.length > 0) {
+                for (var k in keys) {
+                    var key = keys[k];
+                    template = template.replace("{{" + key + "}}", props[key]);
+                }
+            }
+
+            if (feature.properties && feature.properties.popupContent) {
+                template += feature.properties.popupContent;
+            }
+            layer.bindPopup(template);
+        };
+
+        self.addDrawControls = function () {
+            //create mapping drawing functionality
+            var drawnItems = new L.FeatureGroup();
+            self.map.addLayer(drawnItems);
+            var drawControl = new L.Control.Draw({
+                position: 'topright',
+                draw: {
+                    polyline: true,
+                    polygon: true,
+                    circle: false,
+                    marker: true
+                },
+                edit: {
+                    featureGroup: drawnItems,
+                    remove: true
+                }
+            });
+            self.map.addControl(drawControl);
+            //end drawing functionality
+
+            self.map.on(L.Draw.Event.CREATED, function (e) {
+                //custom feature is created on map. Add it or do more with it. 
+                var type = e.layerType;
+                var layer = e.layer;
+                drawnItems.addLayer(layer);
+            });
+
+            self.map.on(L.Draw.Event.EDITED, function (e) {
+                var layers = e.layers;
+                var countOfEditedLayers = 0;
+                layers.eachLayer(function (layer) {
+                    countOfEditedLayers++;
+                });
+
+                //TO DO: Need to add edited features to current geojson
+                var data = featuresLayer.toGeoJSON();
+                data = JSON.stringify(data);
+                filename = $("#js-fileName").val();
+                console.log(filename);
+
+                payload = {
+                    json: data,
+                    outputName: filename
+                }
+
+                //animate progress bar
+                progressBar = $("#js-map-progress-bar");
+                doneProcessing = null;
+
+                if (progressBar) {
+                    var percentVal = 0;
+                    var interval = setInterval(function () {
+                        if (percentVal <= 100) {
+                            progressBar.css('width', percentVal + "%").attr('aria-valuenow', percentVal);
+                            percentVal += .5;
+                            percentVal = Math.round(percentVal);
+                        } else if (percentVal > 100) {
+                            percentVal = 0;
+                        }
+                    }, 50);
+
+                    doneProcessing = function () {
+                        clearInterval(interval);
+                        progressBar.css('width', "0%").attr('aria-valuenow', 0);
+                        console.log("test callback");
+                    }
+                }
+                self.downloadFile(CONVERTER_URL, payload, doneProcessing);
+            });
+        };
+
+        self.addSearchControls = function (searchKey, featuresLayer) {
+
+            var searchControl = new L.Control.Search({
+                layer: featuresLayer,
+                propertyName: searchKey,
+                marker: false,
+                moveToLocation: function (latlng, title, map) {
+                    var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+                    map.setView(latlng, zoom);
+                }
+            });
+
+            searchControl.on('search:locationfound', function (e) {
+                ////if a search is found. Highlight the area
+                e.layer.setStyle({
+                    fillColor: '#3f0',
+                    color: '#0f0'
+                });
+                if (e.layer._popup) {
+                    e.layer.openPopup();
+                }
+            }).on('search:collapsed', function (e) {
+                featuresLayer.eachLayer(function (layer) {
+                    //restore original background color
+                    featuresLayer.resetStyle(layer);
+                });
+            });
+
+            self.map.addControl(searchControl);
+            //end search options
         }
     });
