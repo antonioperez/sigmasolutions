@@ -1,3 +1,5 @@
+(function () {
+
 angular
     .module('app')
     .service('mapservice', function ($http) {
@@ -260,4 +262,6 @@ angular
             map.addControl(searchControl);
             //end search options
         }
-    });
+    })
+
+})();

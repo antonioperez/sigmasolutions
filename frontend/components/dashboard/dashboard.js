@@ -1,3 +1,5 @@
+(function () {
+
 angular
   .module('app')
   .controller('DashboardCtrl', [
@@ -251,4 +253,6 @@ angular
         return new Date(year, month - 1, day).getTime();
       }
     }
-  ]);
+  ])
+
+  })();

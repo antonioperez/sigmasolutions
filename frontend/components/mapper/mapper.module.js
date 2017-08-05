@@ -1,3 +1,5 @@
+(function () {
+
 angular
     .module('app')
     .config([ '$stateProvider', config ]);
@@ -14,3 +16,5 @@ function config($stateProvider) {
             }
         })
 }
+
+})();

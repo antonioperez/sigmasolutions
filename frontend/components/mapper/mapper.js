@@ -1,3 +1,5 @@
+(function () {
+
 angular
     .module('app')
     .controller('MapCtrl', [
@@ -21,4 +23,6 @@ angular
                 popupContent, "Basin_Su_1", true
             );
         }
-    ]);
+    ])
+
+})();

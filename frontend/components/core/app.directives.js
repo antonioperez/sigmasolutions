@@ -1,3 +1,5 @@
+(function () {
+
 angular
     .module('app')
     .directive('pageTitle', [ '$rootScope', '$timeout', pageTitle ])
@@ -163,3 +165,5 @@ function iboxToolsFullScreen($timeout) {
         }]
     };
 }
+
+})();
