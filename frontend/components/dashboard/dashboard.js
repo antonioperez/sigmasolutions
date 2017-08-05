@@ -1,8 +1,8 @@
 angular
   .module('app')
   .controller('DashboardCtrl', [
-    '$http', '$scope', 'mapservice',
-    function ($http, $scope, mapservice) {
+    '$http', '$scope', 'mapservice', '$q',
+    function ($http, $scope, mapservice, $q) {
 
       var vm = this;
 
@@ -12,16 +12,25 @@ angular
         "opacity": 0.65
       };
 
-      var popupContent = "<p>" +
-        "Basin ID: {{Basin_ID}} <br>" +
-        "Basin Name: {{Basin_Name}} <br>" +
-        "Basin_Su_1: {{Basin_Su_1}} <br>" +
-        "Region:  {{Region_Off}} <br>" +
-        "Report: {{Report}} <br>" + "</p>";
+      this.getWellMap = function () {
 
-      // this.basinsmap = mapservice.generateMap(id, "B118CAGroundwaterBasins.zip", mapBackground,
-      //   popupContent, "Basin_Su_1", false
-      // );
+        var wellPopupTemplate = "<p>" +
+          "Station:  {{SITEID}} <br>" +
+          "County: {{COUNTY_NM}} {{STATE}} <br>" +
+          "Date: {{DATA_DATE}} <br>" +
+          "Percentile: {{PERCENTILE}} <br>" +
+          "Water level: {{DATA_VAL}}\" {{VERT_DATUM}} <br>" +
+          "Station:  {{SITEID}} <br>" +
+          "Station Number: {{STATION_NM}} <br>" + "</p>";
+          
+        this.wellmap = mapservice.generateMap("js-well-map", 7, "wells.zip", mapBackground,
+          wellPopupTemplate, null, false
+        );
+        //return deferred.promise;
+      }
+
+
+      this.getWellMap();
 
       vm.flotData = [{
         label: '',
