@@ -5,30 +5,27 @@ angular
     .service('mapservice', function ($http) {
 
         var self = this;
-        
         var CONVERTER_URL = "http://sgma.ecoverse.io/mapper/convertJson";
-        self.backgroundOverlayStyle = {};
-
-        self.searchKey = null;
-
-        self.generateMap = function (mapId, zoom, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions) {
-            //after map is loaded with the data. We need style it. 
+        self.generateMap = function (mapId, zoom, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions, customFeatureCallback) {
 
             $("#"+mapId).css('width', "100%");
             $("#"+mapId).css('height', "500px");
-
             var map = L.map(mapId).setView([36.8, -120], zoom);
             var layer = L.esri.basemapLayer("Topographic").addTo(map);
 
-            self.backgroundOverlayStyle = backgroundOptions;
-            self.searchKey = searchKey;
-            self.addDrawingOptions = addDrawingOptions;
+            var options = {
+                searchKey : searchKey, 
+                addDrawingOptions : addDrawingOptions,
+                backgroundOverlayStyle : backgroundOptions,
+                popupContent : popupContent,
+                customFeatureCallback : customFeatureCallback
+            }
 
-            map = self.loadShapefile(map, zipPath, popupContent);
+            map = self.loadShapefile(map, zipPath, options);
             return map;
         }
 
-        self.loadShapefile = function (map, zipPath, popupContent) {
+        self.loadShapefile = function (map, zipPath, options) {
             shp(zipPath).then(function (geojson) {
                 geoj = geojson.features;
 
@@ -46,22 +43,23 @@ angular
                 var geoj = geoj.filter(function(val){return val});
                 //function to display popup
                 var featuresLayer = L.geoJSON(geoj, {
-                    style: self.backgroundOverlayStyle,
+                    style: options.backgroundOverlayStyle,
                     onEachFeature: function (feature, layer) {
-                        if (popupContent) {
-                            self.onEachFeature(feature, layer, popupContent);
+                        
+                        if (options.popupContent) {
+                            self.onEachFeature(feature, layer, options.popupContent, options.customFeatureCallback);
                         }
                     }
                 });
                 map.addLayer(featuresLayer);
                 //end data to map. 
 
-                if (self.searchKey) {
-                    self.addSearchControls(map, self.searchKey, featuresLayer);
+                if (options.searchKey) {
+                    self.addSearchControls(map, options.searchKey, featuresLayer);
                 }
 
                 //create mapping drawing functionality
-                if (self.addDrawingOptions) {
+                if (options.addDrawingOptions) {
                     self.addDrawControls(map, featuresLayer);
                 }
                 //end drawing functionality
@@ -141,9 +139,13 @@ angular
             xhr.send($.param(payload));
         }
 
-        self.onEachFeature = function (feature, layer, popupContent) {
+        self.onEachFeature = function (feature, layer, popupContent, customFeatureCallback) {
             //function to display popup
             var props = feature.properties;
+            
+            if(customFeatureCallback) {
+                customFeatureCallback(feature, layer);
+            }
 
             //get values;
             var template = popupContent;
