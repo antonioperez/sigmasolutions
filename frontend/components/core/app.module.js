@@ -1,7 +1,7 @@
 (function () {
-    angular.module('app', [
-        'oc.lazyLoad',
-        'ui.router',
-        'ui.bootstrap'
-    ])
+  angular.module('app', [
+    'oc.lazyLoad',
+    'ui.router',
+    'ui.bootstrap'
+  ]);
 })();

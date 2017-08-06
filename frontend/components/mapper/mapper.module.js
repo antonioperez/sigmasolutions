@@ -1,20 +1,23 @@
 (function () {
 
-angular
+  angular
     .module('app')
-    .config([ '$stateProvider', config ]);
+    .config([
+      '$stateProvider',
+      config
+    ]);
 
-function config($stateProvider) {
+  function config($stateProvider) {
     $stateProvider
-        .state('index.basinmapper', {
-            controller: 'MapCtrl',
-            controllerAs: 'map',
-            url: "/basinmapper",
-            templateUrl: "components/mapper/map.html",
-            data: { 
-                pageTitle: 'Maps'
-            }
-        })
-}
+      .state('index.basinmapper', {
+        controller: 'MapCtrl',
+        controllerAs: 'map',
+        url: "/basinmapper",
+        templateUrl: "components/mapper/map.html",
+        data: { 
+          pageTitle: 'Maps'
+        }
+      });
+  }
 
 })();
