@@ -141,6 +141,28 @@ module.exports = function (grunt) {
                         src: ['fonts/*.*'],
                         dest: '<%= inspinia.dist %>'
                     },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= inspinia.app %>',
+                        dest: '<%= inspinia.dist %>',
+                        src: [
+                            'js/plugins/chartJs/Chart.min.js',
+                            'js/plugins/chartJs/angles.js',
+                            'js/plugins/flot/jquery.flot.js',
+                            'js/plugins/flot/jquery.flot.time.js',
+                            'js/plugins/flot/jquery.flot.tooltip.min.js',
+                            'js/plugins/flot/jquery.flot.spline.js',
+                            'js/plugins/flot/jquery.flot.resize.js',
+                            'js/plugins/flot/jquery.flot.pie.js',
+                            'js/plugins/flot/curvedLines.js',
+                            'js/plugins/flot/angular-flot.js',
+                            'js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js',
+                            'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css',
+                            'js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
+                            'js/bootstrap/angular-bootstrap-checkbox.js'
+                        ]
+                    },
                 ]
             },
             styles: {
