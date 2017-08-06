@@ -1,28 +1,30 @@
 (function () {
 
-angular
-    .module('app')
-    .controller('MapCtrl', [
-        '$http', '$scope', 'mapservice',
-        function ($http, $scope, mapservice) {
+    angular
+        .module('app')
+        .controller('MapCtrl', [
+            '$http', '$scope', 'mapservice',
+            function ($http, $scope, mapservice) {
 
-            var background = {
-                "color": "#A9A9A9",
-                "weight": 2,
-                "opacity": 0.65
-            };
+                var background = {
+                    "weight": 2,
+                    "opacity": 0.65
+                };
 
-            var popupContent = "<p>" +
-                "Basin ID: {{Basin_ID}} <br>" +
-                "Basin Name: {{Basin_Name}} <br>" +
-                "Basin_Su_1: {{Basin_Su_1}} <br>" +
-                "Region:  {{Region_Off}} <br>" +
-                "Report: {{Report}} <br>" + "</p>";
-            
-            this.basinsmap = mapservice.generateMap("map", 11, "data/B118CAGroundwaterBasins.zip", background, 
-                popupContent, "Basin_Su_1", true
-            );
-        }
-    ])
+                var popupContent = "<p>" +
+                    "Basin ID: {{Basin}} <br>" +
+                    "GSA filing: <a href='http://sgma.water.ca.gov/portal/gsa/print/{{DWR GSA ID}}' target='_blank'>View</a> <br>" +
+                    "GSA Name:  <a target='_blank' href ='{{GSA URL}} '>{{GSA Name}}  </a><br>" +
+                    "POC Name: {{POC Name}} <br>" +
+                    "POC Email: {{POC Email}} <br>" +
+                    "POC Phone: {{POC Phone}} <br>" +
+                    "Posted DT:  {{Posted DT}} <br>" + 
+                    "Local ID: {{Local ID}} <br>" +"</p>";
+
+                this.basinsmap = mapservice.generateMap("map", 8, "data/ExclusiveGsaMasterSet.zip", background,
+                    popupContent, "Basin_Su_1", true
+                );
+            }
+        ])
 
 })();
