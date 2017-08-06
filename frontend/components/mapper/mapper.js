@@ -25,9 +25,10 @@
       "Posted DT:  {{Posted DT}} <br>" + 
       "Local ID: {{Local ID}} <br>" +"</p>";
 
-    this.basinsmap = mapservice.generateMap("map", 8, "data/ExclusiveGsaMasterSet.zip", background,
-      popupContent, "Basin_Su_1", true
-    );
-  }
+                this.basinsmap = mapservice.generateMap("map", 8, "data/ExclusiveGsaMasterSet.zip", background,
+                    popupContent, "Basin", true
+                );
+            }
+        ])
 
 })();
