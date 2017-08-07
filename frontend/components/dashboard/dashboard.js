@@ -97,25 +97,30 @@
         }
         this.getCountyMap();
 
-        this.getAquaiferMap = function () {
+        this.getGWPlanMap = function () {
 
           var mapBackground = {
-            "color": "#A9A9A9",
             "weight": 2,
             "opacity": 0.65
           };
 
           var popupTemplate = "<p>" +
-            "AQ CODE:  {{AQ_CODE}} <br>" +
-            "AQ NAME: {{AQ_NAME}} <br>" +
-            "ROCK NAME: {{ROCK_NAME}} <br>" +
-            "ROCK TYPE: {{ROCK_TYPE}} <br>" + "</p>";
+            "Agency_Nam:  {{Agency_Nam}} <br>" +
+            "AQ NAME: {{AQ_NAME}} <br>" + 
+            "Phone: {{Phone_numb}}  <br>" +
+            "GW Management Law: {{GW_Mgmt_Ty}}  <br>" +
+            "Address: {{Address_li}} {{Address__1}} <br>" +
+            "Plan_Year: {{Plan_Year}} <br>" +
+            "Plan: <a target='_blank' href='{{Plan}}'>Link</a>  <br>" +
+            "Site: <a target='_blank' href='{{Website}}'>{{Website}}</a>  <br>" +
+            "Adopt: <a target='_blank'>{{Adopt}}</a>  <br>" +
+            "Intent: <a target='_blank'>{{Intent}}</a> <br>" + "</p>";
 
-          this.aquifersmap = mapservice.generateMap("js-aquifers-map", 7, "data/aquifers.zip", mapBackground,
-            popupTemplate, "AQ_CODE", false
+          this.aquifersmap = mapservice.generateMap("js-GWPlanMap-map", 7, "data/Groundwater_Management_Plan.zip", mapBackground,
+            popupTemplate, "Agency_Nam", false
           );
         }
-        this.getAquaiferMap();
+        this.getGWPlanMap();
 
         this.getBasinMap = function () {
 
