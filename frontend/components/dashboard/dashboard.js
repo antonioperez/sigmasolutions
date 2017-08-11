@@ -148,7 +148,6 @@
         $scope.activeMap = $scope.maps[0];
         $scope.generateMap = function (map) {
           $scope.activeMapTitle = map.title;
-          $scope.countymap = null;
           $scope.countymap = mapservice.generateMap("js-leaflet-map", map.zoom, "data/" + map.file + ".zip", map.background,
             map.popup, map.searchKey, map.drawable, map.featureCallback
           );
