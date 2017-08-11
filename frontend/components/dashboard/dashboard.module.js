@@ -2,14 +2,16 @@
 
   angular
     .module('app')
-    .config([ '$stateProvider', '$urlRouterProvider', config ]);
+    .config([ '$stateProvider', config ]);
 
-  function config($stateProvider, $urlRouterProvider) {
+  function config($stateProvider) {
     $stateProvider
       .state('index.dashboard', {
         controller: 'DashboardCtrl',
         controllerAs: 'dashboard',
-        data: { pageTitle: 'Chart.js' },
+        data: {
+          pageTitle: 'Dashboard'
+        },
         resolve: {
           loadPlugin: [ '$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load([
