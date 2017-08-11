@@ -10,6 +10,7 @@
         ]);
 
     function Ctrl($http, $scope, FileUploader) {
+        
         var uploader = $scope.uploader = new FileUploader({
             url: 'upload.php'
         });
