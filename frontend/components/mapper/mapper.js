@@ -25,7 +25,7 @@
             "Posted DT:  {{Posted DT}} <br>" +
             "Local ID: {{Local ID}} <br>" + "</p>";
 
-        this.basinsmap = mapservice.generateMap("map", 8, "data/Groundwater_Management_Plan.zip", background,
+        this.basinsmap = mapservice.generateMap("map", 8, "data/ExclusiveGsaMasterSet.zip", background,
             popupContent, "Basin", true
         );
     }

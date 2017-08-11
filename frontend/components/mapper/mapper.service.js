@@ -21,14 +21,13 @@ angular
                 customFeatureCallback : customFeatureCallback
             }
 
-            map = self.loadShapefile(map, zipPath, options);
+            self.loadShapefile(map, zipPath, options);
             return map;
         }
 
         self.loadShapefile = function (map, zipPath, options) {
             shp(zipPath).then(function (geojson) {
                 geoj = geojson.features;
-
                 //dirty fix to not all certain keys to pass. will need to pass in obj with callback and template. 
                 console.log(geoj[0]);
                 var stateCheck = geoj[0].properties["STATE"];
@@ -63,7 +62,7 @@ angular
                     self.addDrawControls(map, featuresLayer);
                 }
                 //end drawing functionality
-
+                return map;
             });
         }
 
@@ -201,7 +200,6 @@ angular
                 var data = featuresLayer.toGeoJSON();
                 data = JSON.stringify(data);
                 filename = $("#js-fileName").val();
-                console.log(filename);
 
                 payload = {
                     json: data,

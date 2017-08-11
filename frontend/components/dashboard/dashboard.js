@@ -7,165 +7,157 @@
       function ($http, $scope, mapservice, $q) {
         var vm = this;
 
-        this.getpriorityMap = function () {
+        $scope.maps = [{
+            "file": "CASGEM_Groundwater_Basin_Prioritization",
+            "title": "GroundWater Basin Prioritization",
+            "zoom": 7,
+            "background": {
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" + "BAS_SBBSN:  {{BAS_SBBSN}} <br>" +
+              "DWR_Region: {{DWR_Region}} <br>" + "Priority: {{Priority}} <br>" +
+              "Detailed Report: <a target='_blank' href='{{URL}}'>link <br>" + "</p>",
 
-          var mapBackground = {
-            "weight": 2,
-            "opacity": 0.65
-          };
+            "featureCallback": function (feature, layer) {
+              var feat = feature.properties;
+              var options = {};
+              switch (feat.Priority) {
+                case 'Low':
+                  options.color = "green";
+                  break;
+                case "Very Low":
+                  options.color = "blue";
+                  break;
+                case "Medium":
+                  options.color = "yellow";
+                  break;
+                case 'High':
+                  options.color = "orange";
+                  break;
+                case "Very High":
+                  options.color = "red";
+                  break;
+                default:
+                  break;
+              };
 
-          var popupTemplate = "<p>" +
-            "BAS_SBBSN:  {{BAS_SBBSN}} <br>" +
-            "DWR_Region: {{DWR_Region}} <br>" +
-            "Priority: {{Priority}} <br>" +
-            "Detailed Report: <a target='_blank' href='{{URL}}'>link <br>" + "</p>";
+              layer.setStyle(options);
+            },
+            "searchKey": "BAS_SBBSN",
+            "drawable": false
+          },
+          {
+            "file": "County_Boundary",
+            "title": "County Boundaries",
+            "zoom": 7,
+            "background": {
+              "color": "green",
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" +
+              "ABBREV:  {{ABBREV}} <br>" +
+              "ABCODE: {{ABCODE}} <br>" +
+              "FM Name: {{FMNAME_PC}} <br>" +
+              "NAME_PCASE: {{NAME_PCASE}} <br>" + "</p>",
+            "featureCallback": null,
+            "searchKey": "NAME_PCASE",
+            "drawable": false
 
-          var featureCallBack = function (feature, layer) {
-            var feat = feature.properties;
-            var options = {};
-            switch (feat.Priority) {
-              case 'Low':
-                options.color = "green";
-                break;
-              case "Very Low":
-                options.color = "blue";
-                break;
-              case "Medium":
-                options.color = "yellow";
-                break;
-              case 'High':
-                options.color = "orange";
-                break;
-              case "Very High":
-                options.color = "red";
-                break;
-              default:
-                break;
-            };
+          },
+          {
+            "file": "ExclusiveGsaMasterSet",
+            "title": "Current GSAs",
+            "zoom": 7,
+            "background": {
+              "color": "red",
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" + "Basin ID: {{Basin}} <br>" + "GSA filing: <a href='http://sgma.water.ca.gov/portal/gsa/print/{{DWR GSA ID}}' target='_blank'>View</a> <br>" +
+              "GSA Name:  <a target='_blank' href ='{{GSA URL}} '>{{GSA Name}}  </a><br>" +
+              "POC Name: {{POC Name}} <br>" + "POC Email: {{POC Email}} <br>" + "POC Phone: {{POC Phone}} <br>" +
+              "Posted DT:  {{Posted DT}} <br>" + "Local ID: {{Local ID}} <br>" + "</p>",
+            "featureCallback": null,
+            "searchKey": "Basin",
+            "drawable": false
+          },
+          {
+            "file": "Groundwater_Management_Plan",
+            "title": "Current Groundwater Management Plans",
+            "zoom": 7,
+            "background": {
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" +
+              "Agency_Nam:  {{Agency_Nam}} <br>" +
+              "AQ NAME: {{AQ_NAME}} <br>" +
+              "Phone: {{Phone_numb}}  <br>" +
+              "GW Management Law: {{GW_Mgmt_Ty}}  <br>" +
+              "Address: {{Address_li}} {{Address__1}} <br>" +
+              "Plan_Year: {{Plan_Year}} <br>" +
+              "Plan: <a target='_blank' href='{{Plan}}'>Link</a>  <br>" +
+              "Site: <a target='_blank' href='{{Website}}'>{{Website}}</a>  <br>" +
+              "Adopt: <a target='_blank'>{{Adopt}}</a>  <br>" +
+              "Intent: <a target='_blank'>{{Intent}}</a> <br>" + "</p>",
+            "featureCallback": null,
+            "searchKey": "Agency_Nam",
+            "drawable": false
+          },
+          {
+            "file": "B118CAGroundwaterBasins",
+            "title": "B118CA Groundwater Basins Boundaries",
+            "zoom": 8,
+            "background": {
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" + "Basin ID: {{Basin_ID}} <br>" + "Basin Name: {{Basin_Name}} <br>" +
+              "Basin_Su_1: {{Basin_Su_1}} <br>" + "Region:  {{Region_Off}} <br>" + "Report: {{Report}} <br>" + "</p>",
+            "featureCallback": null,
+            "searchKey": "Basin_Su_1",
+            "drawable": false
+          },
+          {
+            "file": "rtn_wells",
+            "title": "Real Time Well Levels",
+            "zoom": 7,
+            "background": {
+              "color": "#A9A9A9",
+              "weight": 2,
+              "opacity": 0.65
+            },
+            "popup": "<p>" +
+              "Site ID: <a target='_blank' href='https://groundwaterwatch.usgs.gov/AWLSites.asp?mt=g&S={{SITEID}}&ncd=awl'>{{SITEID}}</a> <br>" +
+              "County: {{COUNTY_NM}} {{STATE}} <br>" +
+              "Date: {{DATA_DATE}} <br>" +
+              "Percentile: {{PERCENTILE}} <br>" +
+              "Water level: {{DATA_VAL}}\" {{VERT_DATUM}} <br>" +
+              "Station:  {{SITEID}} <br>" +
+              "Station Number: {{STATION_NM}} <br>" + "</p>",
 
-            layer.setStyle(options);
-          };
-
-
-          this.countymap = mapservice.generateMap("js-gwpriority-map", 7, "data/CASGEM_Groundwater_Basin_Prioritization.zip", mapBackground,
-            popupTemplate, "BAS_SBBSN", false, featureCallBack
+            "featureCallback": null,
+            "searchKey": "SITEID",
+            "drawable": false
+          }
+        ]
+        
+        $scope.activeMap = $scope.maps[0];
+        $scope.generateMap = function (map) {
+          $scope.activeMapTitle = map.title;
+          $scope.countymap = null;
+          $scope.countymap = mapservice.generateMap("js-leaflet-map", map.zoom, "data/" + map.file + ".zip", map.background,
+            map.popup, map.searchKey, map.drawable, map.featureCallback
           );
         }
-        this.getpriorityMap();
+        $scope.generateMap($scope.activeMap);
 
-        this.getGSAMap = function () {
-
-          var mapBackground = {
-            "color": "red",
-            "weight": 2,
-            "opacity": 0.65
-          };
-
-          var popupContent = "<p>" +
-            "Basin ID: {{Basin}} <br>" +
-            "GSA filing: <a href='http://sgma.water.ca.gov/portal/gsa/print/{{DWR GSA ID}}' target='_blank'>View</a> <br>" +
-            "GSA Name:  <a target='_blank' href ='{{GSA URL}} '>{{GSA Name}}  </a><br>" +
-            "POC Name: {{POC Name}} <br>" +
-            "POC Email: {{POC Email}} <br>" +
-            "POC Phone: {{POC Phone}} <br>" +
-            "Posted DT:  {{Posted DT}} <br>" +
-            "Local ID: {{Local ID}} <br>" + "</p>";
-
-          this.gpamap = mapservice.generateMap("js-active-gsa-map", 8, "data/ExclusiveGsaMasterSet.zip", mapBackground,
-            popupContent, "Basin", false
-          );
+        $scope.updateMap = function() {
+          $scope.countymap.remove();
+          $scope.generateMap($scope.activeMap);
         }
-        this.getGSAMap();
-
-        this.getCountyMap = function () {
-
-          var mapBackground = {
-            "color": "green",
-            "weight": 2,
-            "opacity": 0.65
-          };
-
-          var popupTemplate = "<p>" +
-            "ABBREV:  {{ABBREV}} <br>" +
-            "ABCODE: {{ABCODE}} <br>" +
-            "FM Name: {{FMNAME_PC}} <br>" +
-            "NAME_PCASE: {{NAME_PCASE}} <br>" + "</p>";
-
-          this.countymap = mapservice.generateMap("js-county-map", 7, "data/County_Boundary.zip", mapBackground,
-            popupTemplate, "NAME_PCASE", false
-          );
-        }
-        this.getCountyMap();
-
-        this.getGWPlanMap = function () {
-
-          var mapBackground = {
-            "weight": 2,
-            "opacity": 0.65
-          };
-
-          var popupTemplate = "<p>" +
-            "Agency_Nam:  {{Agency_Nam}} <br>" +
-            "AQ NAME: {{AQ_NAME}} <br>" + 
-            "Phone: {{Phone_numb}}  <br>" +
-            "GW Management Law: {{GW_Mgmt_Ty}}  <br>" +
-            "Address: {{Address_li}} {{Address__1}} <br>" +
-            "Plan_Year: {{Plan_Year}} <br>" +
-            "Plan: <a target='_blank' href='{{Plan}}'>Link</a>  <br>" +
-            "Site: <a target='_blank' href='{{Website}}'>{{Website}}</a>  <br>" +
-            "Adopt: <a target='_blank'>{{Adopt}}</a>  <br>" +
-            "Intent: <a target='_blank'>{{Intent}}</a> <br>" + "</p>";
-
-          this.aquifersmap = mapservice.generateMap("js-GWPlanMap-map", 7, "data/Groundwater_Management_Plan.zip", mapBackground,
-            popupTemplate, "Agency_Nam", false
-          );
-        }
-        this.getGWPlanMap();
-
-        this.getBasinMap = function () {
-
-          var background = {
-            "weight": 2,
-            "opacity": 0.65
-          };
-
-          var popupContent = "<p>" +
-            "Basin ID: {{Basin_ID}} <br>" +
-            "Basin Name: {{Basin_Name}} <br>" +
-            "Basin_Su_1: {{Basin_Su_1}} <br>" +
-            "Region:  {{Region_Off}} <br>" +
-            "Report: {{Report}} <br>" + "</p>";
-
-          this.basinsmap = mapservice.generateMap("js-basin-map", 8, "data/B118CAGroundwaterBasins.zip", background,
-            popupContent, "Basin_Su_1", false
-          );
-        }
-        this.getBasinMap();
-
-        this.getWellMap = function () {
-
-          var mapBackground = {
-            "color": "#A9A9A9",
-            "weight": 2,
-            "opacity": 0.65
-          };
-
-          var popupTemplate = "<p>" +
-            "Site ID: <a target='_blank' href='https://groundwaterwatch.usgs.gov/AWLSites.asp?mt=g&S={{SITEID}}&ncd=awl'>{{SITEID}}</a> <br>" +
-            "County: {{COUNTY_NM}} {{STATE}} <br>" +
-            "Date: {{DATA_DATE}} <br>" +
-            "Percentile: {{PERCENTILE}} <br>" +
-            "Water level: {{DATA_VAL}}\" {{VERT_DATUM}} <br>" +
-            "Station:  {{SITEID}} <br>" +
-            "Station Number: {{STATION_NM}} <br>" + "</p>";
-
-          this.wellmap = mapservice.generateMap("js-well-map", 7, "data/rtn_wells.zip", mapBackground,
-            popupTemplate, "SITEID", false
-          );
-        }
-
-        this.getWellMap();
-
 
         vm.flotData = [{
           label: '',
