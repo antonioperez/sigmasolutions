@@ -2,6 +2,7 @@
   angular.module('app', [
     'oc.lazyLoad',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angularFileUpload'
   ]);
 })();
