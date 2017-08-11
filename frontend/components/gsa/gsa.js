@@ -2,7 +2,7 @@
 
   angular
     .module('app')
-    .controller('StyleGuideCtrl', ctrl);
+    .controller('GSACtrl', ctrl);
     
     function ctrl () {
       var vm = this;

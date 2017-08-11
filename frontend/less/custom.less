@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
 /* Only demo */
 @media (max-width: 1000px) {
   .welcome-message {
@@ -11,6 +13,11 @@ Custom Elements
 ***************
 */
 
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, a {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 body {
   background-color: #FFFFFF;
 }
@@ -20,6 +27,10 @@ body {
 Custom Classes
 **************
 */
+
+.baby-blue-bg {
+  background-color: #EEF4F9;
+}
 
 /* Side Navigation */
 .nav-header {
@@ -72,8 +83,50 @@ Custom Classes
 }
 /* End Top Navigation */
 
+/* Forms */
+.form-card {
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.03);
+  padding: 40px 80px;
+}
+.form-disclaimer {
+  color: #8091A5;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.form-getting-started {
+  color: #313541;
+  font-family: Lato, "Helvetica Neue";
+  font-size: 48px !important;
+  line-height: 57px;}
+/* End Forms */
+
+/* Buttons */
+.btn i {
+  font-weight: 100;
+}
+.btn-info {
+  height: 48px;
+  width: 224px;
+  border-radius: 50px;
+  background-color: #0294FF;
+}
+.btn-info:hover,
+.btn-info:active {
+  background-color: darken(#0294FF, 4%) !important;
+}
+/* End Buttons */
+
 /* Helper Classes */
 .margin-bottom-0 {
   margin-bottom: 0px;
+}
+.p-b-xxx-lg {
+  padding-bottom: 100px;
+}
+.p-t-xxx-lg {
+  padding-top: 100px;
 }
 /* End Helper Classes */
