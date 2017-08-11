@@ -7,6 +7,7 @@
       function ($http, $scope, mapservice, $q) {
         var vm = this;
 
+        //TO DO: Add API call to get this list. 
         $scope.maps = [{
             "file": "CASGEM_Groundwater_Basin_Prioritization",
             "title": "GroundWater Basin Prioritization",
