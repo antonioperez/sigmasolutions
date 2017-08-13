@@ -32,15 +32,19 @@
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <h5>{{activeMapTitle}}</h5>
+            <h5>{{dashboard.map.title}}</h5>
+            <div class="ibox-tools" uib-dropdown>
+              <a href uib-dropdown-toggle>
+                <i class="fa fa-bars"></i>
+              </a>
+              <ul uib-dropdown-menu>
+                  <li data-ng-repeat="map in dashboard.maps">
+                    <a data-ng-click="dashboard.updateMap(map)">{{::map.title}}</a>
+                  </li>
+              </ul>
+            </div>
           </div>
           <div class="ibox-content" height="200" responsive="true">
-            <p>
-                <div class="text-center">
-                  <label>Change Map Data</label>
-                  <select ng-options="m.title for m in maps" ng-model="activeMap" ng-change="updateMap()"></select>
-                </div>
-            </p>
             <div id="js-leaflet-map"></div>
           </div>
         </div>

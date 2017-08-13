@@ -3,7 +3,7 @@
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
-    'angularFileUpload'
+    //'angularFileUpload'
   ]);
   
 })();
