@@ -1,12 +1,12 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight" nv-file-drop="" uploader="uploader" >
     <div class="row">
         <div class="col-lg-12">
             <div class="text-center m-t-lg">
                 <div class="col-xs-12">
-                    <div class="row" nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
-                        <h2>Your GSA file uploads</h2>
+                    <div class="row" >
+                        <h2>Upload Your GSA Files</h2>
                         <div ng-show="uploader.isHTML5">
-                            <h3>Drag n Drop a file</h3>
+                            <h3>Drag n Drop a file or click the select files button</h3>
                         </div>
                         <table class="table">
                             <thead>
@@ -36,9 +36,6 @@
                                         <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                                         <span class="glyphicon glyphicon-upload"></span> Upload
                                     </button>
-                                        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                    </button>
                                         <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
                                         <span class="glyphicon glyphicon-trash"></span> Remove
                                     </button>
@@ -66,6 +63,31 @@
                         </div>
 
 
+                    </div>
+                    <div class="row" id="uploads">
+                        <br><br><br><br>
+                        <hr>
+                        <h2>Your GSA file uploads</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th >Name</th>
+                                    <th >Size</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in uploadedFiles">
+                                    <td ><a target="_blank" href="{{item.downloadUrl}}"><strong >{{ item.name }}</strong></a></td>
+                                    <td nowrap>{{ item.size/1024/1024|number:2 }} MB</td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
