@@ -20,15 +20,15 @@
         $scope.uploadedFiles = [];
 
 
-        recentFilesRef.on('child_added', function(data) {
-                var childData = data.val();
-                $scope.uploadedFiles.push(childData);
-                $scope.$apply();
+        recentFilesRef.on('child_added', function (data) {
+            var childData = data.val();
+            $scope.uploadedFiles.push(childData);
+            $scope.$apply();
         });
 
         function writeUserData(userId, filename, size, downloadUrl, lastModified) {
             //fancy hashing algorithm goes here
-            var encodedData = window.btoa(filename+size);
+            var encodedData = window.btoa(filename + size);
             var newRef = firebase.database().ref('uploads/' + userId).child(encodedData);
             newRef.set({
                 name: filename,
@@ -67,10 +67,6 @@
             this.isUploading = true;
             this[transport](item);
             this._render();
-        };
-
-        uploader.onCancelItem = function (fileItem, response, status, headers) {
-            console.info('onCancelItem', fileItem, response, status, headers);
         };
 
     }
