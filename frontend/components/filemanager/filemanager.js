@@ -26,9 +26,11 @@
             $scope.$apply();
         });
 
+
+
         function writeUserData(userId, filename, size, downloadUrl, lastModified) {
             //fancy hashing algorithm goes here
-            var encodedData = window.btoa(filename + size);
+            var encodedData = window.btoa(filename);
             var newRef = firebase.database().ref('uploads/' + userId).child(encodedData);
             newRef.set({
                 name: filename,
@@ -46,12 +48,16 @@
             var file = value._file;
             storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
                 var downloadURL = snapshot.downloadURL;
+                item.isSuccess = true;
+                item.isCancel = false;
+                item.isError = false;
                 writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
 
             }, function (error) {
                 // Handle unsuccessful uploads
                 console.log(error);
             });
+
 
             var index = this.getIndexOfItem(value);
             var item = this.queue[index];
