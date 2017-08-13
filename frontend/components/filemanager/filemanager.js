@@ -10,54 +10,80 @@
         ]);
 
     function Ctrl($http, $scope, FileUploader) {
-        
-        var uploader = $scope.uploader = new FileUploader({
-            url: 'upload.php'
-        });
 
-        // FILTERS
-        uploader.filters.push({
-            name: 'customFilter',
-            fn: function(item /*{File|FileLikeObject}*/, options) {
-                return this.queue.length < 10;
-            }
-        });
+        var auth = firebase.auth();
+        var storageRef = firebase.storage().ref();
 
-        // CALLBACKS
-        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-            console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-        uploader.onAfterAddingFile = function(fileItem) {
-            console.info('onAfterAddingFile', fileItem);
-        };
-        uploader.onAfterAddingAll = function(addedFileItems) {
-            console.info('onAfterAddingAll', addedFileItems);
-        };
-        uploader.onBeforeUploadItem = function(item) {
-            console.info('onBeforeUploadItem', item);
-        };
-        uploader.onProgressItem = function(fileItem, progress) {
-            console.info('onProgressItem', fileItem, progress);
-        };
-        uploader.onProgressAll = function(progress) {
-            console.info('onProgressAll', progress);
-        };
-        uploader.onSuccessItem = function(fileItem, response, status, headers) {
-            console.info('onSuccessItem', fileItem, response, status, headers);
-        };
-        uploader.onErrorItem = function(fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
-        };
-        uploader.onCancelItem = function(fileItem, response, status, headers) {
-            console.info('onCancelItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
-            console.info('onCompleteItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteAll = function() {
-            console.info('onCompleteAll');
+        var uploader = $scope.uploader = new FileUploader();
+
+        uploader.uploadItem = function (value) {
+
+            //HAD TO OVERWRITE EXISTING UPLOAD ITEM FUNCTION. 
+            //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
+
+            var file = value._file;           
+            storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
+                console.log('Uploaded a blob or file!');
+
+            }, function (error) {
+                // Handle unsuccessful uploads
+                console.log(error);
+            }, function () {
+
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                var downloadURL = uploadTask.snapshot.downloadURL;
+                console.log(downloadURL);
+            });
+
+            var index = this.getIndexOfItem(value);
+            var item = this.queue[index];
+            var transport = this.isHTML5 ? '_xhrTransport' : '_iframeTransport';
+
+            item._prepareToUploading();
+            if(this.isUploading) return;
+
+            this._onBeforeUploadItem(item);
+            if (item.isCancel) return;
+
+            item.isUploading = true;
+            this.isUploading = true;
+            this[transport](item);
+            this._render();
         };
 
-        console.info('uploader', uploader);
+
+
+        // // CALLBACKS
+        // uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/ , filter, options) {
+        //     console.info('onWhenAddingFileFailed', item, filter, options);
+        // };
+
+        // uploader.onAfterAddingAll = function (addedFileItems) {
+        //     console.info('onAfterAddingAll', addedFileItems);
+        // };
+
+        // uploader.onProgressItem = function (fileItem, progress) {
+        //     console.info('onProgressItem', fileItem, progress);
+        // };
+        // uploader.onProgressAll = function (progress) {
+        //     console.info('onProgressAll', progress);
+        // };
+        // uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        //     console.info('onSuccessItem', fileItem, response, status, headers);
+        // };
+        // uploader.onErrorItem = function (fileItem, response, status, headers) {
+
+        // };
+        // uploader.onCancelItem = function (fileItem, response, status, headers) {
+        //     console.info('onCancelItem', fileItem, response, status, headers);
+        // };
+        // uploader.onCompleteItem = function (fileItem, response, status, headers) {
+        //     console.info('onCompleteItem', fileItem, response, status, headers);
+        // };
+        // uploader.onCompleteAll = function () {
+        //     console.info('onCompleteAll');
+        // };
+
     }
 })();

@@ -53,8 +53,20 @@
     <!-- Main view  -->
     <div ui-view></div>
 
-
     <!-- build:js(.) scripts/vendor.js -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD2IoWGPJGvJFoN5xexwNBgHVdb5kbjYzg",
+            authDomain: "sigmasolutions-176200.firebaseapp.com",
+            databaseURL: "https://sigmasolutions-176200.firebaseio.com",
+            projectId: "sigmasolutions-176200",
+            storageBucket: "sigmasolutions-176200.appspot.com",
+            messagingSenderId: "398743798805"
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <!-- jQuery and Bootstrap -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -114,13 +126,13 @@
     <script src="components/mapper/mapper.module.js"></script>
     <script src="components/mapper/mapper.js"></script>
 
-<script src="components/gsa/gsa.module.js"></script>
-<script src="components/gsa/gsa.js"></script>
+    <script src="components/gsa/gsa.module.js"></script>
+    <script src="components/gsa/gsa.js"></script>
 
- <script src="components/filemanager/filemanager.module.js"></script>
+    <script src="components/filemanager/filemanager.module.js"></script>
     <script src="components/filemanager/filemanager.js"></script>
-    
-<!-- endbuild -->
+
+    <!-- endbuild -->
 
 </body>
 

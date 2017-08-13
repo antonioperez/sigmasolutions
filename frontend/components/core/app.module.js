@@ -5,4 +5,5 @@
     'ui.bootstrap',
     'angularFileUpload'
   ]);
+  
 })();
