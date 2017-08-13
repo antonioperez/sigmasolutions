@@ -73,6 +73,7 @@
                                 <tr>
                                     <th >Name</th>
                                     <th >Size</th>
+                                    <th >Last Modified</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -80,6 +81,7 @@
                                 <tr ng-repeat="item in uploadedFiles">
                                     <td ><a target="_blank" href="{{item.downloadUrl}}"><strong >{{ item.name }}</strong></a></td>
                                     <td nowrap>{{ item.size/1024/1024|number:2 }} MB</td>
+                                    <td nowrap>{{ item.lastModified | date:'yyyy-MM-dd h:mm:ss a'}}</td>
                                     <td nowrap>
                                         <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
                                         <span class="glyphicon glyphicon-trash"></span> Remove
