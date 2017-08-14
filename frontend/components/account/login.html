@@ -14,6 +14,9 @@
     <p>
       Login in. To see it in action.
     </p>
+    <div class="alert alert-danger" ng-show="errorMessage">
+       {{errorMessage}}
+    </div>
     <form class="m-t" role="form" >
       <div class="form-group">
         <input type="email" class="form-control" placeholder="Username" required ng-model="email">
