@@ -17,7 +17,13 @@
         $scope.email = "sigmasolutions@ecoverse.io";
         $scope.password = "demo123";
 
-        var firebaseSignin = function (email, password) {
+        var sendEmailVerification = function () {
+            auth.currentUser.sendEmailVerification().then(function () {
+                console.log('Email Verification Sent!');
+            });
+        }
+
+        var signin = function (email, password) {
             // Sign in with email and pass.
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
@@ -33,18 +39,19 @@
                     } else {
                         console.log(errorMessage);
                     }
-                    $scope.errorMessage = errorMessage; 
+                    $scope.errorMessage = errorMessage;
                 });
         }
 
-        var firebaseSignup = function (email, password) {
+        var signup = function (email, password) {
             auth.createUserWithEmailAndPassword(email, password)
                 .then(function (user) {
                     console.log(user);
+                    sendEmailVerification();
                     $state.go('index.dashboard');
                 })
                 .catch(function (error) {
-                    
+
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     if (errorCode == 'auth/weak-password') {
@@ -52,10 +59,13 @@
                     } else {
                         console.log(errorMessage);
                     }
-                    $scope.errorMessage = errorMessage; 
+                    $scope.errorMessage = errorMessage;
                     console.log(error);
                 });
         }
+
+
+
 
         $scope.signIn = function () {
 
@@ -75,7 +85,7 @@
             }
 
             // Sign in with email and pass.
-            firebaseSignin($scope.email, $scope.password);
+            signin($scope.email, $scope.password);
         }
 
         $scope.signUp = function () {
@@ -90,7 +100,7 @@
                 return;
             }
             // Sign in with email and pass.
-            firebaseSignup($scope.email, $scope.password);
+            signup($scope.email, $scope.password);
         }
 
     }
