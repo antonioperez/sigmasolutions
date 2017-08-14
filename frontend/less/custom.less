@@ -136,8 +136,19 @@ Custom Classes
     font-size: 48px !important;
     line-height: 57px;
 }
-
-
+.form-title {
+  color: #0294FF;
+  font-family: "Helvetica Neue";
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 39px;
+}
+.form-info {
+  color: #313541;
+  font-family: Lato, "Helvetica Neue";
+  font-size: 16px;
+  line-height: 28px;
+}
 /* End Forms */
 
 
@@ -193,5 +204,182 @@ Custom Classes
     background-color: rgba(86, 189, 91, 0.05);
 }
 
-
 /* End Helper Classes */
+
+/* Form Wizard */
+/* ---------------------------------------------------------------------- */
+.swMain > ul {
+  display: table;
+  list-style: none;
+  margin: 0 0 40px 0;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.swMain > ul li {
+  display: table-cell;
+  text-align: center;
+  width: 1%;
+}
+
+.swMain > ul li > a:before {
+  border-top: 4px solid #EEF4F9;
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 1px;
+  overflow: hidden;
+  position: relative;
+  top: 21px;
+  width: 100%;
+  z-index: 1;
+}
+
+.swMain > ul li:first-child > a:before {
+  left: 50%;
+  max-width: 51%;
+}
+
+.swMain > ul li:last-child > a:before {
+  max-width: 50%;
+  width: 50%;
+}
+
+.swMain > ul li > a.selected:before, .swMain li > a.done:before {
+  border-color: #56BD5B;
+}
+
+.swMain > ul .stepNumber {
+  background-color: #FFFFFF;
+  border: 5px solid #EEF4F9;
+  border-radius: 100% 100% 100% 100%;
+  color: #546474;
+  display: inline-block;
+  font-size: 15px;
+  height: 40px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  width: 40px;
+  z-index: 2;
+}
+
+.swMain > ul li > a.selected .stepNumber {
+  border-color: EEF4F9;
+}
+
+.swMain ul li > a.done .stepNumber, .swMain > ul li:last-child > a.selected .stepNumber {
+  border-color: #EEF4F9;
+  background-color: #56BD5B;
+  color: #fff;
+  text-indent: -9999px;
+}
+
+.swMain ul li > a.done .stepNumber:before, .swMain > ul li:last-child > a.selected .stepNumber:before {
+  content: "\f00c";
+  display: inline;
+  float: right;
+  font-family: FontAwesome;
+  font-weight: 300;
+  height: auto;
+  text-shadow: none;
+  margin-right: 7px;
+  text-indent: 0;
+}
+
+.swMain ul li > a.done.wait .stepNumber {
+  background-color: #F6F6F6 !important;
+  color: #CCCCCC !important;
+  text-indent: -0px !important;
+}
+
+.swMain ul li > a.done.wait .stepNumber:before {
+  content: "" !important;
+}
+
+.swMain > ul li .stepDesc {
+  color: #8091A5;
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  max-width: 100%;
+  table-layout: fixed;
+  text-align: center;
+  word-wrap: break-word;
+  z-index: 104;
+}
+
+.swMain > ul li > a.selected .stepDesc, .swMain li > a.done .stepDesc {
+  color: #0294FF;
+}
+
+.swMain > ul li > a:hover {
+  text-decoration: none;
+}
+
+.swMain > ul li > a.disabled {
+  cursor: default;
+}
+
+.swMain .progress {
+  margin-bottom: 30px;
+}
+
+.swMain .stepContainer {
+  height: auto !important;
+}
+
+.swMain .loader {
+  display: none;
+}
+
+.swMain [class^="button"], .swMain [class*=" button"] {
+  display: none;
+}
+
+.swMain .close {
+  display: none;
+}
+
+/* End Form Wizard */
+
+/* Datepicker */
+.date-picker-date-time {
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 20px 0 rgba(176,186,197,0.4);
+}
+.date-picker-date-time th {
+  color: #0294FF;
+}
+.date-picker-date-time .switch {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 17px;
+  text-align: center;
+}
+.date-picker-date-time th.ng-scope {
+  color: #3F4A56;
+  font-family: Lato;
+  font-size: 12px;
+  line-height: 15px;
+}
+.date-picker-date-time tbody td,
+.date-picker-date-time tbody td span.now {
+  color: #3F4A56;
+  font-family: Lato;
+  font-size: 12px;
+  text-align: center;
+}
+.date-picker-date-time tbody td span.now {
+  background-image: none;
+  background-color: #FFFFFF;
+}
+.date-picker-date-time tbody td span.active {
+  border-radius: 4px;	background: linear-gradient(180deg, #05C6FF 0%, #0294FF 100%);
+}
+/* End Datepicker */

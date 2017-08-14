@@ -38,7 +38,8 @@
     "esri-leaflet": "^2.0.8",
     "shp": "^3.4.0",
     "Ionicons": "ionicons#^2.0.1",
-    "angular-file-upload": "^2.5.0"
+    "angular-file-upload": "^2.5.0",
+    "angular-datepicker": "^2.0.3"
   },
   "resolutions": {
     "angular": "~1.5.0",
