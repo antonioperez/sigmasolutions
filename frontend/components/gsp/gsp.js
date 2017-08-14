@@ -13,8 +13,8 @@
 
       vm.questions = [
         {
-          title: 'Decision To Become A GSA',
-          info: 'Please enter the date your local agency, or agencies, decided to become or form a GSA.',
+          title: 'Decision To Become A GSP',
+          info: 'What was your groundwater usage?',
           template: function () {
             return 'components/gsp/templates/start-gsa.html';
           }
@@ -23,7 +23,7 @@
 
       vm.faqs = [
         {
-          question: 'What is water code 10721?',
+          question: 'What is GSP?',
           answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
         }
       ]
