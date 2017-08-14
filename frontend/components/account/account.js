@@ -7,10 +7,17 @@
             '$scope',
             '$location',
             '$state',
+            'gsaservice',
             Ctrl
         ]);
 
-    function Ctrl($http, $scope, $location, $state) {
+    function Ctrl($http, $scope, $location, $state, gsaservice) {
+
+        var gsa;
+        gsaservice.getGSAs("", 3, 0);
+
+        console.log("GSAS!!");
+        console.log(gsa);
 
         var auth = firebase.auth();
         //demo info
