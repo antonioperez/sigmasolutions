@@ -57,18 +57,18 @@
         }
 
 
-    function sendPasswordReset(email) {
-      firebase.auth().sendPasswordResetEmail(email).then(function() {
-        $scope.message = 'Password Reset Email Sent!';
-      }).catch(function(error) {
-        var errorMessage = error.message;
-        $scope.errorMessage = errorMessage;
-      });
-    }
+        function sendPasswordReset(email) {
+            firebase.auth().sendPasswordResetEmail(email).then(function () {
+                $scope.message = 'Password Reset Email Sent!';
+            }).catch(function (error) {
+                var errorMessage = error.message;
+                $scope.errorMessage = errorMessage;
+            });
+        }
 
-    $scope.sendPasswordReset = function() {
-        sendPasswordReset($scope.email);
-    };
+        $scope.sendPasswordReset = function () {
+            sendPasswordReset($scope.email);
+        };
 
 
         $scope.signIn = function () {
@@ -105,6 +105,14 @@
             }
             // Sign in with email and pass.
             signup($scope.email, $scope.password);
+        }
+
+        $scope.signOut = function () {
+            if (auth.currentUser) {
+                auth.signOut();
+                $state.go('index.login');
+            }
+            
         }
 
     }
