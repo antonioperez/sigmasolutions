@@ -16,7 +16,7 @@
           title: 'Decision To Become A GSA',
           info: 'Please enter the date your local agency, or agencies, decided to become or form a GSA.',
           template: function () {
-            return 'components/gsa/templates/decision-to-become-gsa.html';
+            return 'components/gsa/decision-to-become-gsa.html';
           }
         }
       ];

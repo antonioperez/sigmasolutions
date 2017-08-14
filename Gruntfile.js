@@ -123,6 +123,7 @@ module.exports = function (grunt) {
                             '.htaccess',
                             '*.html',
                             'components/{,*/}*.html',
+                            'components/{,*/}*.png',
                             'styles/patterns/*.*',
                             'img/{,*/}*.*'
                         ]
