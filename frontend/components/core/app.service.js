@@ -13,7 +13,7 @@
                 return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
             }
 
-            self.getGSAs = function (name, pageSize, pageOffset) {
+            self.getGSAs = function (name, pageSize, pageOffset, callback) {
                 var result;
                 var data = {
                     jsonrpc: '2.0',
@@ -32,12 +32,11 @@
                     data: data,
                     url: API_URL,
                 }).then(function successCallback(response) {
-                    console.log(response.data.result);
-                    return response.data.result;
-
+                    if(callback) {
+                        callback(response.data.result);
+                    }
                 }, function errorCallback(response) {
                     console.log(API_URL + " " + response);
-                    result = [];
                 });
 
             }

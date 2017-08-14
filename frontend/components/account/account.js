@@ -13,11 +13,10 @@
 
     function Ctrl($http, $scope, $location, $state, gsaservice) {
 
-        var gsa;
-        gsaservice.getGSAs("", 3, 0);
-
-        console.log("GSAS!!");
-        console.log(gsa);
+        gsaservice.getGSAs("", 3, 0, function(data) {
+            console.log("YAY DATA");
+            console.log(data);
+        });
 
         var auth = firebase.auth();
         //demo info
