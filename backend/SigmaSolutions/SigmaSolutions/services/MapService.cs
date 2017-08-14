@@ -15,19 +15,21 @@ using System.Threading.Tasks;
 
 
 using File = Google.Apis.Drive.v3.Data.File;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SigmaSolutions.services
 {
     class MapService
     {
-        static string[] Scopes = { DriveService.Scope.DriveReadonly };
-        static string ApplicationName = "Sigma Map Services";
 
-        public UserCredential credential;
+        static string[] Scopes = { DriveService.Scope.Drive };
+        static string ApplicationName = "SigmaSolutions";
+        static UserCredential credential;
+        static DriveService service;
 
         public MapService ()
         {
-            using (var stream =new FileStream("client_id.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream("client_id.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = System.Environment.GetFolderPath(
                     System.Environment.SpecialFolder.Personal);
@@ -40,16 +42,41 @@ namespace SigmaSolutions.services
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
             }
-        }
 
-        private DriveService getService()
-        {
-            DriveService service = new DriveService(new BaseClientService.Initializer()
+            service = new DriveService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
-            return service;
+        }
+
+
+        [PublishedAttribute]
+        public string uploadFile()
+        {
+            try
+            {
+                    var fileMetadata = new File()
+                {
+                    Name = "photo.jpg"
+                };
+                FilesResource.CreateMediaUpload request;
+                using (var stream = new System.IO.FileStream("client_id.json",
+                                        System.IO.FileMode.Open))
+                {
+                    request = service.Files.Create(
+                        fileMetadata, stream, "application/json");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var file = request.ResponseBody;
+                }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return "";
         }
 
         private static string GetMimeType(string fileName)
@@ -70,25 +97,31 @@ namespace SigmaSolutions.services
         {
             List<string> filelist = new List<string>();
             // Define parameters of request.
-            DriveService service = getService();
-            FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.PageSize = 30;
-            listRequest.Fields = "nextPageToken, files(id, name)";
-            //listRequest.Q = "";
-
-            // List files.
-            IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute().Files;
-            if (files != null && files.Count > 0)
+            try
             {
-                foreach (var f in files)
+                FilesResource.ListRequest listRequest = service.Files.List();
+                listRequest.PageSize = 4;
+                listRequest.Fields = "nextPageToken, files(id, name)";
+                //listRequest.Q = "";
+
+                // List files.
+                IList<File> files = listRequest.Execute().Files;
+                if (files != null && files.Count > 0)
                 {
-                    if (f != null)
-                        filelist.Add(f.Name);
+                    foreach (var f in files)
+                    {
+                        if (!String.IsNullOrEmpty(f.Name))
+                            filelist.Add(f.Name);
+                    }
+                }
+                else
+                {
+                    throw new Exception("No files found.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("No files found.");
+                throw new Exception(ex.Message);
             }
 
             return filelist.ToArray();
@@ -100,14 +133,34 @@ namespace SigmaSolutions.services
         {
             List<string> filelist = new List<string>();
             // Define parameters of request.
-            DriveService service = getService();
-            FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.PageSize = 30;
-            listRequest.Fields = "nextPageToken, files(id, name)";
-            //listRequest.Q = "";
-        
-            return filelist.ToArray();
+            try
+            {
+                FilesResource.ListRequest listRequest = service.Files.List();
+                listRequest.PageSize = 4;
+                listRequest.Fields = "nextPageToken, files(id, name)";
+                //listRequest.Q = "";
 
+                // List files.
+                IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute().Files;
+                if (files != null && files.Count > 0)
+                {
+                    foreach (var f in files)
+                    {
+                        if (!String.IsNullOrEmpty(f.Name))
+                            filelist.Add(f.Name);
+                    }
+                }
+                else
+                {
+                    throw new Exception("No files found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return filelist.ToArray();
         }
 
     }
