@@ -51,20 +51,24 @@
                     $state.go('index.dashboard');
                 })
                 .catch(function (error) {
-
-                    var errorCode = error.code;
                     var errorMessage = error.message;
-                    if (errorCode == 'auth/weak-password') {
-                        console.log('The password is too weak.');
-                    } else {
-                        console.log(errorMessage);
-                    }
                     $scope.errorMessage = errorMessage;
-                    console.log(error);
                 });
         }
 
 
+    function sendPasswordReset(email) {
+      firebase.auth().sendPasswordResetEmail(email).then(function() {
+        $scope.message = 'Password Reset Email Sent!';
+      }).catch(function(error) {
+        var errorMessage = error.message;
+        $scope.errorMessage = errorMessage;
+      });
+    }
+
+    $scope.sendPasswordReset = function() {
+        sendPasswordReset($scope.email);
+    };
 
 
         $scope.signIn = function () {
