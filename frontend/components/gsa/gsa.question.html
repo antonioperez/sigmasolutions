@@ -31,7 +31,7 @@
             <div class="col-sm-8">
               <p class="form-title">{{::gsa.questions[gsa.questionIndex].title}}</p>
               <p class="form-info">{{::gsa.questions[gsa.questionIndex].info}}</p>
-              <div data-ng-include="'components/gsa/templates/decision-to-become-gsa.html'"></div>
+              <div data-ng-include="gsa.questions[gsa.questionIndex].template()"></div>
             </div>
             <div class="col-sm-4 p-r-0 m-t-lg">
               <p class="form-faq">FAQ</p>
