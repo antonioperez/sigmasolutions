@@ -4,7 +4,8 @@
     'ui.router',
     'ui.bootstrap',
     'angularFileUpload',
-    'datePicker'
+    'datePicker',
+    'ngSanitize'
   ]);
   
 })();
