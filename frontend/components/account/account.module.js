@@ -8,6 +8,8 @@
     $stateProvider
       .state('login', {
         url: "/login",
+        controller: 'AccountCtrl',
+        controllerAs: 'account',
         templateUrl: "components/account/login.html",
         data: {
           pageTitle: 'Login',
@@ -15,6 +17,8 @@
         }
       })
       .state('forgot_password', {
+        controller: 'AccountCtrl',
+        controllerAs: 'account',
         url: "/forgot_password",
         templateUrl: "components/account/forgot.password.html",
         data: {
@@ -23,6 +27,8 @@
         }
       })
       .state('register', {
+        controller: 'AccountCtrl',
+        controllerAs: 'account',
         url: "/register",
         templateUrl: "components/account/register.html",
         data: {
