@@ -12,7 +12,7 @@
     vm.questions = [{
         info: 'What is your GSA\'s name?',
         template: function () {
-          return 'components/gsa/decision-to-become-gsa.html';
+          return 'components/gsa/rename-this-template-1.html';
         },
         faqs: [
         {
