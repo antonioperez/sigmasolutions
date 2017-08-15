@@ -10,32 +10,32 @@
                   <li>
                     <a class="done">
                       <div class="stepNumber">1</div>
-                      <div class="stepDesc text-small">Title</div>
+                      <div class="stepDesc text-small">Eligiblilty</div>
                     </a>
                   </li>
                   <li>
                     <a>
                       <div class="stepNumber">2</div>
-                      <div class="stepDesc text-small">Title</div>
+                      <div class="stepDesc text-small">Notice</div>
                     </a>
                   </li>
                   <li>
                     <a>
                       <div class="stepNumber">3</div>
-                      <div class="stepDesc text-small">Title</div>
+                      <div class="stepDesc text-small">Submission</div>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
             <div class="col-sm-8">
-              <p class="form-title">{{::gsa.sections[gsa.sectionIndex].title}}</p>
-              <p class="form-info">{{::gsa.sections[gsa.sectionIndex].questions[gsa.questionIndex].info}}</p>
-              <div data-ng-include="gsa.questions[gsa.questionIndex].template()"></div>
+              <p class="form-title">{{gsa.activeSection.title}}</p>
+              <p class="form-info">{{gsa.activeSection.questions[gsa.questionIndex].info}}</p>
+              <div data-ng-include="gsa.activeSection.questions[gsa.questionIndex].template()"></div>
             </div>
             <div class="col-sm-4 p-r-0 m-t-lg">
-              <p class="form-faq">FAQ</p>
-              <div ng-repeat="faq in gsa.sections[gsa.sectionIndex].questions[gsa.questionIndex].faqs">
+              <p class="form-faq" ng-show = "gsa.activeSection.questions[gsa.questionIndex].faqs">FAQ</p>
+              <div ng-repeat="faq in gsa.activeSection.questions[gsa.questionIndex].faqs">
                 <span class="form-q">Q: <span class="form-q-a">{{faq.question}}</span></span>
                 <br>
                 <span class="form-a">A: <span class="form-a-a">{{faq.answer}}</span></span>
