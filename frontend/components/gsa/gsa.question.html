@@ -29,9 +29,9 @@
               </div>
             </div>
             <div class="col-sm-8">
-              <p class="form-title">{{gsa.activeSection.title}}</p>
-              <p class="form-info">{{gsa.activeSection.questions[gsa.questionIndex].info}}</p>
-              <div data-ng-include="gsa.activeSection.questions[gsa.questionIndex].template()"></div>
+              <p class="form-title">{{gsa.activeTitle}}</p>
+              <p class="form-info">{{gsa.activeQuestion.info}}</p>
+              <div data-ng-include="gsa.activeQuestion.template()"></div>
 
               <div class="row">
                 <hr>
@@ -42,8 +42,8 @@
               </div>
             </div>
             <div class="col-sm-4 p-r-0 m-t-lg">
-              <p class="form-faq" ng-show="gsa.activeSection.questions[gsa.questionIndex].faqs">FAQ</p>
-              <div ng-repeat="faq in gsa.activeSection.questions[gsa.questionIndex].faqs">
+              <p class="form-faq" ng-show="gsa.activeQuestion.faqs.length">FAQ</p>
+              <div ng-repeat="faq in gsa.activeQuestion.faqs">
                 <span class="form-q">Q: <span class="form-q-a">{{faq.question}}</span></span>
                 <br>
                 <span class="form-a">A: <span class="form-a-a">{{faq.answer}}</span></span>

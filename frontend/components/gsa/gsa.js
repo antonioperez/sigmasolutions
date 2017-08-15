@@ -8,12 +8,12 @@
     var vm = this;
 
     vm.options = ['first option', 'second option', 'third option'];
-    vm.answers = {
+    vm.answers = {};
 
-    };
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
-    vm.activeSection = {};
+    vm.questionTop = []
+    vm.activeTitle = "";
     vm.activeQuestion = {};
 
     vm.questions = [{
@@ -54,6 +54,7 @@
           faqs: []
         }
       }, {
+        id: "1.2",
         questionKey: "Multiple Agencies",
         info: 'Are you going to form a GSA with multiple local agencies?',
         template: function () {
@@ -61,10 +62,11 @@
         },
         faqs: [],
         moreAction: {
+          id: "1.3",
           questionKey: "Joint Powers",
           info: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
           template: function () {
-            return 'components/gsa/decision-to-become-gsa.html';
+            return 'components/gsa/1.3.html';
           },
           faqs: [{
             question: 'What are these forms?',
@@ -74,9 +76,10 @@
       },
       {
         questionKey: "Boundary",
+        id: "1.4",
         info: 'Attach statutary area boundary shapefile',
         template: function () {
-          return 'components/gsa/decision-to-become-gsa.html';
+          return 'components/gsa/1.4.html';
         },
         faqs: [{
           question: 'Shapefiles Guidelines',
@@ -91,37 +94,51 @@
     }]
 
     vm.fillAnswer = function () {
-      var answer = vm.activeSection.questions[vm.questionIndex].value;
-      console.log(answer);
-      var questionKey = vm.activeSection.questions[vm.questionIndex].questionKey;
+      var answer = vm.activeQuestion.value;
+      var questionKey = vm.activeQuestion.questionKey;
       if (answer) {
         vm.answers[questionKey] = answer;
       }
       console.log(vm.answers);
     }
 
+    vm.setMoreAction = function (val){
+      vm.activeQuestion.more = val;
+    }
+
     vm.nextQuestion = function () {
       vm.fillAnswer();
-      var moreAction = vm.activeSection.questions[vm.questionIndex].moreAction;
-      if (moreAction) {
-        vm.activeSection.questions[vm.questionIndex] = vm.activeSection.questions[vm.questionIndex].moreAction;
+      if (vm.activeQuestion.more) {
+        vm.activeQuestion.more = false;
+        vm.setQuestion(vm.activeQuestion.moreAction);
       } else {
         vm.questionIndex += 1;
+        var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+        vm.setQuestion(question);
       }
     }
 
-    vm.changeValue = function(val) {
-      vm.activeSection.questions[vm.questionIndex].value = val;
+    vm.setQuestion = function (question) {
+      console.log(vm.questionIndex);
+      vm.questionTop.push(question);
+      vm.activeQuestion = question;
     }
-  
-    vm.goBack = function () {
-      var moreAction = vm.sections[vm.sectionIndex].questions[vm.questionIndex].moreAction
-      if (moreAction){
-        console.log(moreAction);
-        vm.activeSection.questions[vm.questionIndex] = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
-      } else if (vm.questionIndex > 0) {
-         vm.questionIndex -= 1;
+
+    vm.changeValue = function (val, isMoreAction) {
+      if (isMoreAction){
+        vm.setMoreAction(isMoreAction);
       }
+      vm.activeQuestion.value = val;
+    }
+
+    vm.goBack = function () {
+      
+      vm.questionTop.pop();
+      vm.questionIndex = vm.questionTop.length - 1;
+      var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+      vm.activeQuestion = question;
+      console.log(vm.questionTop); 
+      
     }
 
     vm.showAnswers = function () {
@@ -129,9 +146,13 @@
     }
 
     vm.init = function () {
-      vm.activeSection = vm.sections[vm.sectionIndex];
+      vm.activeTitle = vm.sections[vm.sectionIndex].title;
+      var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+      vm.setQuestion(question);
     }
     vm.init();
+
+
   }
 
 })();
