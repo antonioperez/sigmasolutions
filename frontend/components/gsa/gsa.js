@@ -7,6 +7,8 @@
   function Ctrl() {
     var vm = this;
 
+    vm.options = ['first option', 'second option', 'third option'];
+
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questions = [{
