@@ -131,6 +131,13 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
+                        cwd: 'bower_components/Ionicons',
+                        src: ['fonts/*.*'],
+                        dest: '<%= inspinia.dist %>'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
                         cwd: 'bower_components/fontawesome',
                         src: ['fonts/*.*'],
                         dest: '<%= inspinia.dist %>'
