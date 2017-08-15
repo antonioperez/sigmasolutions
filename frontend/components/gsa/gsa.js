@@ -10,9 +10,9 @@
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questions = [{
-        info: 'What is your GSA\'s name?',
+        info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
         template: function () {
-          return 'components/gsa/rename-this-template-1.html';
+          return 'components/gsa/1.0.html';
         },
         faqs: [
         {
@@ -27,7 +27,7 @@
       {
         info: 'Are you an exclusive agency?',
         template: function () {
-          return 'components/gsa/decision-to-become-gsa.html';
+          return 'components/gsa/1.1.html';
         },
         faqs: [],
         moreAction: {
@@ -67,7 +67,6 @@
         }]
       }
     ];
-
 
     vm.sections = [
       {
