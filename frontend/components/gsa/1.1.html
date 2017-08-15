@@ -3,14 +3,12 @@
     <label class="font-normal form-label col-xs-12">Are you an exclusive agency?</label>
     <div class="col-xs-12" data-toggle="buttons">
       
-
       <label class="btn form-btn m-r-md">
-        <input type="radio" name="exclusive" value="no" ng-model = "gsa.activeSection.questions[gsa.questionIndex].value"> No
+        <input type="radio" name="value" ng-focus= "gsa.changeValue('no')" ng-model = "gsa.activeSection.questions[gsa.questionIndex].value"> No
       </label>
       <label class="btn form-btn m-r-md">
-        <input type="radio" name="exclusive"  value = "yes" ng-model = "gsa.activeSection.questions[gsa.questionIndex].value"> Yes
+        <input type="radio" name="value"  ng-focus = "gsa.changeValue('yes')"  ng-model = "gsa.activeSection.questions[gsa.questionIndex].value"> Yes
       </label>
-
     </div>
   </div>
 </div>

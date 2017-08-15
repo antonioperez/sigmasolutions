@@ -20,7 +20,6 @@
         id: "1.0",
         info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
         questionKey: "Agency Name",
-        value: "",
         template: function () {
           return 'components/gsa/1.0.html';
         },
@@ -93,10 +92,12 @@
 
     vm.fillAnswer = function () {
       var answer = vm.activeSection.questions[vm.questionIndex].value;
+      console.log(answer);
       var questionKey = vm.activeSection.questions[vm.questionIndex].questionKey;
       if (answer) {
         vm.answers[questionKey] = answer;
       }
+      console.log(vm.answers);
     }
 
     vm.nextQuestion = function () {
@@ -107,11 +108,18 @@
       } else {
         vm.questionIndex += 1;
       }
-      
+    }
+
+    vm.changeValue = function(val) {
+      vm.activeSection.questions[vm.questionIndex].value = val;
     }
   
     vm.goBack = function () {
-      if (vm.questionIndex > 0) {
+      var moreAction = vm.sections[vm.sectionIndex].questions[vm.questionIndex].moreAction
+      if (moreAction){
+        console.log(moreAction);
+        vm.activeSection.questions[vm.questionIndex] = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+      } else if (vm.questionIndex > 0) {
          vm.questionIndex -= 1;
       }
     }
