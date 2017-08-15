@@ -19,7 +19,6 @@
         var recentFilesRef = database.ref('uploads/userid').limitToLast(10);
         $scope.uploadedFiles = [];
 
-
         recentFilesRef.on('child_added', function (data) {
             var childData = data.val();
             $scope.uploadedFiles.push(childData);
@@ -31,7 +30,7 @@
         function writeUserData(userId, filename, size, downloadUrl, lastModified) {
             //fancy hashing algorithm goes here
             var encodedData = window.btoa(filename);
-            var newRef = firebase.database().ref('uploads/' + userId).child(encodedData);
+            var newRef = database.ref('uploads/' + userId).child(encodedData);
             newRef.set({
                 name: filename,
                 size: size,
