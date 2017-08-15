@@ -101,18 +101,19 @@
 
     vm.nextQuestion = function () {
       vm.fillAnswer();
-      vm.questionIndex += 1;
+      var moreAction = vm.activeSection.questions[vm.questionIndex].moreAction;
+      if (moreAction) {
+        vm.activeSection.questions[vm.questionIndex] = vm.activeSection.questions[vm.questionIndex].moreAction;
+      } else {
+        vm.questionIndex += 1;
+      }
+      
     }
   
     vm.goBack = function () {
       if (vm.questionIndex > 0) {
          vm.questionIndex -= 1;
       }
-    }
-
-    vm.moreAction = function () {
-      vm.fillAnswer();
-      vm.activeSection.questions[vm.questionIndex] = vm.activeSection.questions[vm.questionIndex].moreAction;
     }
 
     vm.showAnswers = function () {
