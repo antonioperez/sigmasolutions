@@ -7,10 +7,10 @@
   function Ctrl() {
     var vm = this;
 
+    vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questions = [{
-        title: 'Becoming a GSA',
-        info: 'What is your GSAs name?',
+        question: 'What is your GSA\'s name?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
@@ -25,29 +25,26 @@
         }]
       },
       {
-        title: 'Becoming a GSA',
-        info: 'Are you an exclusive agency?',
+        question: 'Are you an exclusive agency?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
         faqs: [],
         moreAction: {
-          title: 'Information About GSA Eligibility',
-          info: 'As discussed in this document, formation of a GSA is not necessary if a local agency plans to submit an Alternative Plan for an entire basin by January 1, 2017. Additional information about GSAs and the requirement to develop groundwater sustainability plans (GSPs) by 2020 or 2022, or Alternative Plans by 2017, is available on DWR’s Sustainable Groundwater Management website included here: http://water.ca.gov/groundwater/sgm/index.cfm',
+          question: 'As discussed in this document, formation of a GSA is not necessary if a local agency plans to submit an Alternative Plan for an entire basin by January 1, 2017. Additional information about GSAs and the requirement to develop groundwater sustainability plans (GSPs) by 2020 or 2022, or Alternative Plans by 2017, is available on DWR’s Sustainable Groundwater Management website included here: http://water.ca.gov/groundwater/sgm/index.cfm',
           template: function () {
             return 'components/gsa/decision-to-become-gsa.html';
           },
           faqs: []
         }
       },{
-        title: 'Becoming a GSA',
-        info: 'Are you going to form a GSA with multiple local agencies?',
+        question: 'Are you going to form a GSA with multiple local agencies?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
         faqs: [],
         moreAction: {
-          info: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
+          question: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
           template: function () {
             return 'components/gsa/decision-to-become-gsa.html';
           },
@@ -60,8 +57,7 @@
         }
       },
       {
-        title: 'Becoming a GSA',
-        info: 'Attach statutary area boundary shapefile',
+        question: 'Attach statutary area boundary shapefile',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
@@ -71,6 +67,14 @@
         }]
       }
     ];
+
+
+    vm.sections = [
+      {
+        title : "Becoming a GSA",
+        questions : vm.questions
+      }
+    ]
   }
 
 })();

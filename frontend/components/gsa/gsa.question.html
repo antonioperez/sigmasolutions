@@ -29,13 +29,13 @@
               </div>
             </div>
             <div class="col-sm-8">
-              <p class="form-title">{{::gsa.questions[gsa.questionIndex].title}}</p>
-              <p class="form-info">{{::gsa.questions[gsa.questionIndex].info}}</p>
+              <p class="form-title">{{::gsa.sections[gsa.sectionIndex].title}}</p>
+              <p class="form-info">{{::gsa.sections[gsa.sectionIndex].questions[gsa.questionIndex].question}}</p>
               <div data-ng-include="gsa.questions[gsa.questionIndex].template()"></div>
             </div>
             <div class="col-sm-4 p-r-0 m-t-lg">
               <p class="form-faq">FAQ</p>
-              <div ng-repeat="faq in ::gsa.questions[gsa.questionIndex].faqs">
+              <div ng-repeat="faq in gsa.sections[gsa.sectionIndex].questions[gsa.questionIndex].faqs">
                 <span class="form-q">Q: <span class="form-q-a">{{faq.question}}</span></span>
                 <br>
                 <span class="form-a">A: <span class="form-a-a">{{faq.answer}}</span></span>
