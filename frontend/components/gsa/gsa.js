@@ -10,7 +10,7 @@
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questions = [{
-        question: 'What is your GSA\'s name?',
+        info: 'What is your GSA\'s name?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
@@ -25,26 +25,26 @@
         }]
       },
       {
-        question: 'Are you an exclusive agency?',
+        info: 'Are you an exclusive agency?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
         faqs: [],
         moreAction: {
-          question: 'As discussed in this document, formation of a GSA is not necessary if a local agency plans to submit an Alternative Plan for an entire basin by January 1, 2017. Additional information about GSAs and the requirement to develop groundwater sustainability plans (GSPs) by 2020 or 2022, or Alternative Plans by 2017, is available on DWR’s Sustainable Groundwater Management website included here: http://water.ca.gov/groundwater/sgm/index.cfm',
+          info: 'As discussed in this document, formation of a GSA is not necessary if a local agency plans to submit an Alternative Plan for an entire basin by January 1, 2017. Additional information about GSAs and the requirement to develop groundwater sustainability plans (GSPs) by 2020 or 2022, or Alternative Plans by 2017, is available on DWR’s Sustainable Groundwater Management website included here: http://water.ca.gov/groundwater/sgm/index.cfm',
           template: function () {
             return 'components/gsa/decision-to-become-gsa.html';
           },
           faqs: []
         }
       },{
-        question: 'Are you going to form a GSA with multiple local agencies?',
+        info: 'Are you going to form a GSA with multiple local agencies?',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
         faqs: [],
         moreAction: {
-          question: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
+          info: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
           template: function () {
             return 'components/gsa/decision-to-become-gsa.html';
           },
@@ -57,7 +57,7 @@
         }
       },
       {
-        question: 'Attach statutary area boundary shapefile',
+        info: 'Attach statutary area boundary shapefile',
         template: function () {
           return 'components/gsa/decision-to-become-gsa.html';
         },
