@@ -4,12 +4,12 @@
     .module('app')
     .controller('DashboardCtrl', [
       '$http',
+      'gsaservice',
       'mapservice',
-      '$q',
       Ctrl
     ]);
 
-    function Ctrl ($http, mapservice, $q) {
+    function Ctrl ($http, gsaservice, mapservice) {
       var vm = this;
       
       vm.generateMap = function (map) {
@@ -337,35 +337,10 @@
           email: 'mante.kylie@yahoo.com',
           date: '11-06-2017',
           numbers: '63'
-        },
-        {
-          name: 'District No. 32',
-          basin: 'Modesto',
-          basinNumber: 37675,
-          manager: 'Bobby Park',
-          email: 'estevan.beatty@gmail.com',
-          date: '03-20-2017',
-          numbers: '40'
-        },
-        {
-          name: 'District No. 78',
-          basin: 'Turlock',
-          basinNumber: 35950,
-          manager: 'Isaac Colon',
-          email: 'lefler_janice@stark.tv',
-          date: '06-06-2017',
-          numbers: '9'
-        },
-        {
-          name: 'District No. 56',
-          basin: 'Merced',
-          basinNumber: 7817,
-          manager: 'Charlier Miller',
-          email: 'cronin_karl@yahoo.com',
-          date: '05-20-2017',
-          numbers: '55'
         }
       ];
+
+      vm.notices = gsaservice.getDemoGSA();
 
       function gd(year, month, day) {
         return new Date(year, month - 1, day).getTime();
