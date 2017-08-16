@@ -23,7 +23,7 @@
               <div class="row">
                 <hr>
                 <div class="form-group col-md-12 p-l-0 m-t-12">
-                  <button class="btn form-btn m-r-md" ng-click="gsa.goBack()">Back</button>
+                  <button class="btn form-btn m-r-md" ng-click="gsa.goBack()" ng-show="gsa.questionIndex > 0 || gsa.sectionIndex >= 1">Back</button>
                   <button class="btn btn-success form-btn pull-right" ng-click="gsa.nextQuestion()">Continue</button>
                 </div>
               </div>
