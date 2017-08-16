@@ -2,19 +2,73 @@
 
   angular
     .module('app')
-    .controller('GSACtrl', Ctrl);
+    .controller('GSACtrl', ['$http', "FileUploader", Ctrl]);
 
-  function Ctrl() {
+  function Ctrl($http, FileUploader) {
     var vm = this;
+
+    var uploader = vm.uploader = new FileUploader();
+    var auth = firebase.auth();
+    var storageRef = firebase.storage().ref();
+    var database = firebase.database();
 
     vm.options = ['first option', 'second option', 'third option'];
     vm.answers = {};
+    vm.percent = 0;
 
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questionTop = []
     vm.activeTitle = "";
     vm.activeQuestion = {};
+
+    function writeUserData(userId, filename, size, downloadUrl, lastModified) {
+      //fancy hashing algorithm goes here
+      var encodedData = window.btoa(filename);
+      var newRef = database.ref('uploads/' + userId).child(encodedData);
+      newRef.set({
+        name: filename,
+        size: size,
+        downloadUrl: downloadUrl,
+        lastModified: lastModified
+      });
+    }
+
+    uploader.uploadItem = function (value) {
+
+      //HAD TO OVERWRITE EXISTING UPLOAD ITEM FUNCTION. 
+      //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
+      var self = this;
+      var file = value._file;
+      storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
+        var downloadURL = snapshot.downloadURL;
+        item.isSuccess = true;
+        item.isCancel = false;
+        item.isError = false;
+        writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
+        self._render();
+
+      }, function (error) {
+        // Handle unsuccessful uploads
+        console.log(error);
+      });
+
+
+      var index = this.getIndexOfItem(value);
+      var item = this.queue[index];
+      var transport = this.isHTML5 ? '_xhrTransport' : '_iframeTransport';
+
+      item._prepareToUploading();
+      if (this.isUploading) return;
+
+      this._onBeforeUploadItem(item);
+      if (item.isCancel) return;
+
+      item.isUploading = true;
+      this.isUploading = true;
+      this[transport](item);
+      this._render();
+    };
 
     vm.questions = [{
         id: "1.0",
@@ -60,7 +114,10 @@
         template: function () {
           return 'components/gsa/1.2.html';
         },
-        faqs: [],
+        faqs: [{
+          question: 'We\'ll make the shapefile!',
+          answer: 'Shapefiles are required of your basin boundary. Use the map on the left to map your basin!'
+        }],
         moreAction: {
           id: "1.3",
           questionKey: "Joint Powers",
@@ -102,7 +159,7 @@
       console.log(vm.answers);
     }
 
-    vm.setMoreAction = function (val){
+    vm.setMoreAction = function (val) {
       vm.activeQuestion.more = val;
     }
 
@@ -125,20 +182,20 @@
     }
 
     vm.changeValue = function (val, isMoreAction) {
-      if (isMoreAction){
+      if (isMoreAction) {
         vm.setMoreAction(isMoreAction);
       }
       vm.activeQuestion.value = val;
     }
 
     vm.goBack = function () {
-      
+
       vm.questionTop.pop();
       vm.questionIndex = vm.questionTop.length - 1;
       var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
       vm.activeQuestion = question;
-      console.log(vm.questionTop); 
-      
+      console.log(vm.questionTop);
+
     }
 
     vm.showAnswers = function () {

@@ -28,5 +28,7 @@
         this.basinsmap = mapservice.generateMap("map", 8, "data/ExclusiveGsaMasterSet.zip", background,
             popupContent, "Basin", true
         );
+
+
     }
 })();

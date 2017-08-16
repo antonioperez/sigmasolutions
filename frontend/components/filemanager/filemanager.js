@@ -43,7 +43,7 @@
 
             //HAD TO OVERWRITE EXISTING UPLOAD ITEM FUNCTION. 
             //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
-
+            var self = this;
             var file = value._file;
             storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
                 var downloadURL = snapshot.downloadURL;
@@ -51,6 +51,7 @@
                 item.isCancel = false;
                 item.isError = false;
                 writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
+                self._render();
 
             }, function (error) {
                 // Handle unsuccessful uploads
