@@ -128,18 +128,6 @@
             answer: 'SGMA allows multiple local agencies to act as a single GSA through a memorandum of agreement (MOA), a joint powers agreement (JPA), or any other legal agreement (California Water Code, Section [§] 10723.6'
           }]
         },
-      },
-      {
-        questionKey: "Boundary",
-        id: "1.4",
-        info: 'Attach statutary area boundary shapefile',
-        template: function () {
-          return 'components/gsa/1.4.html';
-        },
-        faqs: [{
-          question: 'Shapefiles Guidelines',
-          answer: '"A service area shapefile attribute table should contain one record in the attribute table per service area. Include at least one field in the attribute table that identifies the name of the local agency.'
-        }]
       }
     ];
 
@@ -167,29 +155,47 @@
         template: function () {
           return 'components/gsa/2.1.html';
         },
-        faqs: [],
-        moreAction: {
-          id: "2.3",
-          questionKey: "Joint Powers",
-          info: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
-          template: function () {
-            return 'components/gsa/1.3.html';
-          },
-          faqs: [{
-            question: 'What are these forms?',
-            answer: 'SGMA allows multiple local agencies to act as a single GSA through a memorandum of agreement (MOA), a joint powers agreement (JPA), or any other legal agreement (California Water Code, Section [§] 10723.6'
-          }]
-        },
+        faqs: []
       },
       {
-        questionKey: "Boundary",
+        questionKey: "GSA Descrip",
         id: "2.2",
-        info: 'Attach statutary area boundary shapefile',
+        info: 'Describe your GSA',
         template: function () {
           return 'components/gsa/2.2.html';
         },
+        faqs: []
+      },
+      {
+        questionKey: "GSA Basins",
+        id: "2.3",
+        info: 'Service boundaries may cover multiple groundwater basins. If you become a GSA in multiple basins, you may need to coordinate with other GSAs to develop/implement GSPs in multiple basins',
+        template: function () {
+          return 'components/gsa/2.3.html';
+        },
+        faqs: []
+      },
+      {
+        questionKey: "Basin Boundary",
+        id: "1.4",
+        info: 'GSA formation requires identification of the basin or the portion of a basin that your local agency (or agencies based on previous questions) intends to manage. The area your agency will manage should be constrained within a basin\'s boundaries. Exclusivity will only apply to the area within the service area (or collective service areas) of the local agency or agencies forming the GSA',
+        template: function () {
+          return 'components/gsa/1.4.html';
+        },
         faqs: [{
-          question: 'Shapefiles Guidelines',
+          question: 'Basin Boundary Guidelines',
+          answer: 'The area your agency will manage should be constrained within a basin\'s boundaries'
+        }]
+      },
+      {
+        questionKey: "Service Area",
+        id: "1.5",
+        info: 'Service area shape file reflects the boundaries of a single local agency (or collective service area boundaries)',
+        template: function () {
+          return 'components/gsa/1.4.html';
+        },
+        faqs: [{
+          question: 'Service Area Guidelines',
           answer: '"A service area shapefile attribute table should contain one record in the attribute table per service area. Include at least one field in the attribute table that identifies the name of the local agency.'
         }]
       }
