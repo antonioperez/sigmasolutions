@@ -49,7 +49,7 @@
         self._render();
 
       }, function (error) {
-        // Handle unsuccessful uploads
+
         console.log(error);
       });
 
@@ -71,23 +71,6 @@
     };
 
     vm.questions = [{
-        id: "1.0",
-        info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
-        questionKey: "Agency Name",
-        template: function () {
-          return 'components/gsa/1.0.html';
-        },
-        faqs: [{
-            question: 'What is water code 10721?',
-            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
-          },
-          {
-            question: 'What is water code 10723?',
-            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
-          }
-        ]
-      },
-      {
         id: "1.1",
         info: 'These local agencies will be considered "exclusive" within their statutory boundaries unless they opt out of this responsibility by sending a notice to DWR. No other local agency operating within the statutory boundaries of these exclusive local agencies may decide to become a GSA in these areas until DWR has received a notice stating otherwise.',
         questionKey: "Exclusive Agency",
@@ -107,6 +90,23 @@
           },
           faqs: []
         }
+      },
+      {
+        id: "1.0",
+        info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
+        questionKey: "Agency Name",
+        template: function () {
+          return 'components/gsa/1.0.html';
+        },
+        faqs: [{
+            question: 'What is water code 10721?',
+            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
+          },
+          {
+            question: 'What is water code 10723?',
+            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
+          }
+        ]
       }, {
         id: "1.2",
         questionKey: "Multiple Agencies",
@@ -114,10 +114,7 @@
         template: function () {
           return 'components/gsa/1.2.html';
         },
-        faqs: [{
-          question: 'We\'ll make the shapefile!',
-          answer: 'Shapefiles are required of your basin boundary. Use the map on the left to map your basin!'
-        }],
+        faqs: [],
         moreAction: {
           id: "1.3",
           questionKey: "Joint Powers",
@@ -129,7 +126,7 @@
             question: 'What are these forms?',
             answer: 'SGMA allows multiple local agencies to act as a single GSA through a memorandum of agreement (MOA), a joint powers agreement (JPA), or any other legal agreement (California Water Code, Section [§] 10723.6'
           }]
-        }
+        },
       },
       {
         questionKey: "Boundary",
@@ -146,9 +143,14 @@
     ];
 
     vm.sections = [{
-      title: "Becoming a GSA",
-      questions: vm.questions
-    }]
+        title: "Becoming a GSA",
+        questions: vm.questions
+      },
+      {
+        title: "GSA Notice",
+        questions: vm.questions
+      }
+    ]
 
     vm.fillAnswer = function () {
       var answer = vm.activeQuestion.value;
@@ -156,7 +158,6 @@
       if (answer) {
         vm.answers[questionKey] = answer;
       }
-      console.log(vm.answers);
     }
 
     vm.setMoreAction = function (val) {
@@ -176,7 +177,6 @@
     }
 
     vm.setQuestion = function (question) {
-      console.log(vm.questionIndex);
       vm.questionTop.push(question);
       vm.activeQuestion = question;
     }
@@ -194,7 +194,7 @@
       vm.questionIndex = vm.questionTop.length - 1;
       var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
       vm.activeQuestion = question;
-      console.log(vm.questionTop);
+
 
     }
 
