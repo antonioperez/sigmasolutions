@@ -221,11 +221,19 @@
     }
 
     vm.goBack = function () {
-      
-      vm.questionTop.pop();
-      vm.questionIndex = vm.questionTop.length - 1;
-      var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
-      vm.activeQuestion = question;
+      console.log(vm.sectionIndex);
+      console.log(vm.questionIndex); 
+      if (vm.sectionIndex >= 1 & vm.questionIndex < 1) {
+          vm.percent -= percentPadder;
+          vm.sectionIndex -= 1;
+          vm.questionIndex = vm.sections[vm.sectionIndex].questions.length - 1;
+          vm.init();
+      } else {
+        vm.questionTop.pop();
+        vm.questionIndex = vm.questionTop.length - 1;
+        var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+        vm.activeQuestion = question;
+      }
     }
 
     vm.showAnswers = function () {
