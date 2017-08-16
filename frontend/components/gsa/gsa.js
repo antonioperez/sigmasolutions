@@ -143,33 +143,13 @@
       }
     ];
 
-    vm.questions2 = [{
-        id: "2.1",
-        info: 'These local agencies will be considered "exclusive" within their statutory boundaries unless they opt out of this responsibility by sending a notice to DWR. No other local agency operating within the statutory boundaries of these exclusive local agencies may decide to become a GSA in these areas until DWR has received a notice stating otherwise.',
-        questionKey: "Exclusive Agency",
-        template: function () {
-          return 'components/gsa/1.1.html';
-        },
-        faqs: [{
-          question: 'What is an exclusive agency?',
-          answer: 'Only exclusive GSAs can coordinate to develop a GSP for a basin and submit that GSP to DWR for review. If not, there are alternative plans.'
-        }],
-        moreAction: {
-          id: "2.1.0",
-          questionKey: "Alternative Plan",
-          info: 'Formation of a GSA is not necessary if a local agency plans to submit an Alternative Plan for an entire basin by January 1, 2017. Additional information about GSAs and the requirement to develop groundwater sustainability plans (GSPs) by 2020 or 2022, or Alternative Plans by 2017, is available on DWR’s Sustainable Groundwater Management website included here: http://water.ca.gov/groundwater/sgm/index.cfm',
-          template: function () {
-            return 'components/gsa/1.1.0.html';
-          },
-          faqs: []
-        }
-      },
+    vm.questions2 = [
       {
         id: "2.0",
-        info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
-        questionKey: "Agency Name",
+        info: 'What is your contact information?',
+        questionKey: "Contact",
         template: function () {
-          return 'components/gsa/1.0.html';
+          return 'components/gsa/2.0.html';
         },
         faqs: [{
             question: 'What is water code 10721?',
@@ -181,11 +161,11 @@
           }
         ]
       }, {
-        id: "2.2",
-        questionKey: "Multiple Agencies",
-        info: 'Are you going to form a GSA with multiple local agencies?',
+        id: "2.1",
+        questionKey: "Creation Date",
+        info: 'A local agency must notify the Department of Water Resources (DWR) of their intent to undertake sustainable groundwater management within 30 days. Based on your "decision date", please enter or select the date when your agency declared its GSA status',
         template: function () {
-          return 'components/gsa/1.2.html';
+          return 'components/gsa/2.1.html';
         },
         faqs: [],
         moreAction: {
@@ -203,10 +183,10 @@
       },
       {
         questionKey: "Boundary",
-        id: "2.4",
+        id: "2.2",
         info: 'Attach statutary area boundary shapefile',
         template: function () {
-          return 'components/gsa/1.4.html';
+          return 'components/gsa/2.2.html';
         },
         faqs: [{
           question: 'Shapefiles Guidelines',
