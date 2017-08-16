@@ -11,10 +11,11 @@
     var auth = firebase.auth();
     var storageRef = firebase.storage().ref();
     var database = firebase.database();
-
+    
     vm.options = ['first option', 'second option', 'third option'];
     vm.answers = {};
     vm.percent = 0;
+    
 
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
@@ -152,10 +153,27 @@
       }
     ]
 
+    var sectionsPercent = function () {
+      var sectionsNum = vm.sections.length;
+      if (sectionsNum) {
+        return (100.0/sectionsNum)
+      } else {
+        return 1; 
+      }
+
+    }
+
+    var percentPadder = sectionsPercent();
+
+    vm.setQuestion = function (question) {
+      vm.questionTop.push(question);
+      vm.activeQuestion = question;
+    }
+
     vm.fillAnswer = function () {
-      var answer = vm.activeQuestion.value;
-      var questionKey = vm.activeQuestion.questionKey;
-      if (answer) {
+      if (vm.activeQuestion) {
+        var answer = vm.activeQuestion.value;
+        var questionKey = vm.activeQuestion.questionKey;
         vm.answers[questionKey] = answer;
       }
     }
@@ -164,21 +182,35 @@
       vm.activeQuestion.more = val;
     }
 
+    vm.init = function () {
+      vm.activeTitle = vm.sections[vm.sectionIndex].title;
+      var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+      vm.setQuestion(question);
+    }
+    vm.init();
+
     vm.nextQuestion = function () {
       vm.fillAnswer();
+      var questionsLen = vm.sections[vm.sectionIndex].questions.length;
       if (vm.activeQuestion.more) {
         vm.activeQuestion.more = false;
         vm.setQuestion(vm.activeQuestion.moreAction);
       } else {
         vm.questionIndex += 1;
         var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
-        vm.setQuestion(question);
+        var isNextSection = vm.sections[vm.sectionIndex+1];
+        if (question) {
+          vm.setQuestion(question);
+        } else if (isNextSection) {
+          vm.percent += percentPadder;
+          vm.sectionIndex += 1;
+          vm.questionIndex = 0;
+          vm.init();
+        } else {
+          console.log("Done");
+          //done section
+        }
       }
-    }
-
-    vm.setQuestion = function (question) {
-      vm.questionTop.push(question);
-      vm.activeQuestion = question;
     }
 
     vm.changeValue = function (val, isMoreAction) {
@@ -189,27 +221,16 @@
     }
 
     vm.goBack = function () {
-
+      
       vm.questionTop.pop();
       vm.questionIndex = vm.questionTop.length - 1;
       var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
       vm.activeQuestion = question;
-
-
     }
 
     vm.showAnswers = function () {
       console.log(vm.answers);
     }
-
-    vm.init = function () {
-      vm.activeTitle = vm.sections[vm.sectionIndex].title;
-      var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
-      vm.setQuestion(question);
-    }
-    vm.init();
-
-
   }
 
 })();
