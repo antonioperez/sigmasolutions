@@ -270,11 +270,12 @@
         vm.activeQuestion.more = false;
         vm.setQuestion(vm.activeQuestion.moreAction);
       } else {
-        vm.questionIndex += 1;
+        var nextIndex = vm.questionIndex + 1;
         var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
         var isNextSection = vm.sections[vm.sectionIndex + 1];
         if (question) {
           vm.setQuestion(question);
+          vm.questionIndex += 1;
         } else if (isNextSection) {
           vm.percent += percentPadder;
           vm.sectionIndex += 1;
@@ -283,6 +284,7 @@
         } else {
           vm.percent = 100;
           console.log("Done");
+          vm.showAnswers();
           //done section
         }
       }
@@ -299,6 +301,7 @@
       console.log(vm.sectionIndex);
       console.log(vm.questionIndex);
       if (vm.sectionIndex >= 1 & vm.questionIndex < 1) {
+
         vm.percent -= percentPadder;
         vm.sectionIndex -= 1;
         vm.questionIndex = vm.sections[vm.sectionIndex].questions.length - 1;
