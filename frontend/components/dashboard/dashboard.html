@@ -3,9 +3,22 @@
     <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
+          <h5>GSA Progress</h5>
+        </div>
+        <div class="ibox-content" style="min-height:300px;">
+          <div align="center">
+            <img width="160" src="components/layout/progress.png">
+            <button class="btn gsa-progress-btn"><span>Pick Up Where I Left Off!</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
           <h5>Water Quality</h5>
         </div>
-        <div class="ibox-content">
+        <div class="ibox-content" style="min-height:300px;">
           <div align="center">
             <c3chart bindto-id="gauge-plot1-chart">
               <chart-column column-id="Data 1" column-color="#0294FF"
@@ -23,12 +36,12 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>Well Functionality</h5>
         </div>
-        <div class="ibox-content">
+        <div class="ibox-content" style="min-height:300px;">
           <div>
             <canvas doughnutchart options="dashboard.doughnutOptions" data="dashboard.doughnutData" responsive="true"></canvas>
           </div>
