@@ -248,7 +248,7 @@
 
     var percentPadder = sectionsPercent();
 
-    vm.setQuestion = function (question) {
+    vm.setView = function (question) {
       vm.questionTop.push(question);
       vm.activeQuestion = question;
     }
@@ -276,7 +276,7 @@
     vm.init = function () {
       vm.activeTitle = vm.sections[vm.sectionIndex].title;
       var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
-      vm.setQuestion(question);
+      vm.setView(question);
     }
     vm.init();
 
@@ -297,14 +297,14 @@
         
       } else if (vm.activeQuestion.more) {
         vm.activeQuestion.more = false;
-        vm.setQuestion(vm.activeQuestion.moreAction);
+        vm.setView(vm.activeQuestion.moreAction);
       } else {
         var nextIndex = vm.questionIndex + 1;
         var question = vm.sections[vm.sectionIndex].questions[nextIndex];
         var isNextSection = vm.sections[vm.sectionIndex + 1];
         if (question) {
           vm.questionIndex += 1;
-          vm.setQuestion(question);
+          vm.setView(question);
         } else if (isNextSection) {
           vm.questionIndex += 1;
           vm.percent += percentPadder;
@@ -313,7 +313,17 @@
           vm.init();
         } else {
           vm.percent = 100;
-          console.log("Done");
+          vm.questionIndex += 1;
+          vm.setView(
+            {
+              id: "DONE",
+              questionKey: "Review",
+              info: 'Please Review Your GSA Answers!',
+              template: function () {
+                return 'components/gsa/gsa.review.html';
+              }
+            }
+          );
           vm.showAnswers();
           //done section
         }
@@ -342,7 +352,7 @@
         var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
         vm.activeQuestion = question;
       }
-    }
+    } 
 
     vm.showAnswers = function () {
       console.log(vm.answers);
