@@ -158,11 +158,14 @@
       }, {
         id: "2.1",
         questionKey: "Creation Date",
-        info: 'A local agency must notify the Department of Water Resources (DWR) of their intent to undertake sustainable groundwater management within 30 days. Based on your "decision date", please enter or select the date when your agency declared its GSA status',
+        info: 'Please enter or select the date when your agency declared its GSA status:',
         template: function () {
           return 'components/gsa/2.1.html';
         },
-        faqs: []
+        faqs: [{
+          question: 'When is the decision date determined?',
+          answer: 'A local agency must notify the Department of Water Resources (DWR) of their intent to undertake sustainable groundwater management within 30 days. Based on your decision date'
+        }]
       },
       {
         questionKey: "GSA Descrip",
