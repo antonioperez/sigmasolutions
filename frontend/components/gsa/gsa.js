@@ -203,8 +203,17 @@
         },
         faqs: [{
           question: 'Who is considered an interested party?',
-          answer: '<br> 1. Agricultural users. <br> 2. Domestic well owners. <br> 3. Municpal well operators. <br> 4. Public Water Systems <br> 5. Local land use planning agencies. '
+          answer: '<br> 1. Agricultural users. <br> 2. Domestic well owners. <br> 3. Municpal well operators. <br> 4. Public Water Systems <br> 5. Local land use planning agencies. <br> 6. Environmental users of groundwater. <br> 7. Surface water users. '
         }]
+      },
+      {
+        questionKey: "Adopted Laws",
+        id: "1.6",
+        info: 'Copies of any new by laws, ordinances or new authorities adopted by your agency. ',
+        template: function () {
+          return 'components/gsa/1.3.html';
+        },
+        faqs: []
       }
     ];
 
