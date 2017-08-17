@@ -305,22 +305,22 @@
       };
 
       vm.doughnutData = [{
-          value: 300,
-          color: "#a3e1d4",
-          highlight: "#1ab394",
-          label: "App"
-        },
-        {
-          value: 50,
-          color: "#dedede",
-          highlight: "#1ab394",
-          label: "Software"
+          value: 250,
+          color: "#0294FF",
+          highlight: "#007BE6",
+          label: "Enough"
         },
         {
           value: 100,
-          color: "#A4CEE8",
-          highlight: "#1ab394",
-          label: "Laptop"
+          color: "#F7B422",
+          highlight: "#DE9B09",
+          label: "Insufficient"
+        },
+        {
+          value: 75,
+          color: "#E34C4C",
+          highlight: "#CA3333",
+          label: "Dry"
         }
       ];
 

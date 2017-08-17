@@ -15,7 +15,8 @@
                   max="100"
                   width="39"/>
             </c3chart>
-            <span class="on-track">You are on track!</span>
+            <p></p>
+            <span class="on-track m-t-lg">You are on track!</span>
             <br>
             <span class="progress-remaining">You still have 40% of your daily water left</span>
           </div>
@@ -25,12 +26,23 @@
     <div class="col-md-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Pie </h5>
+          <h5>Well Functionality</h5>
           <div ibox-tools></div>
         </div>
         <div class="ibox-content">
           <div>
             <canvas doughnutchart options="dashboard.doughnutOptions" data="dashboard.doughnutData" responsive="true"></canvas>
+          </div>
+          <div class="row m-t-lg" align="center">
+            <div class="col-lg-4">
+              <button disabled class="well-functionality-key enough"></button>Enough
+            </div>
+            <div class="col-lg-4">
+                <button disabled class="well-functionality-key insufficient"></button>Insufficient
+            </div>
+            <div class="col-lg-4">
+                <button disabled class="well-functionality-key dry"></button>Dry
+            </div>
           </div>
         </div>
       </div>
