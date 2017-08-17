@@ -47,7 +47,8 @@
     "angular-svg-round-progressbar": "0.4.8",
     "s-circle-progress": "^0.1.0",
     "progress-bubble": "^1.3.1",
-    "c3": "^0.4.16"
+    "c3": "^0.4.16",
+    "lato": "^0.3.0"
   },
   "resolutions": {
     "angular": "~1.5.0",

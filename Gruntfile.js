@@ -131,6 +131,13 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
+                        cwd: 'bower_components/lato',
+                        src: ['font/lato-regular/*.*'],
+                        dest: '<%= inspinia.dist %>'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
                         cwd: 'bower_components/Ionicons',
                         src: ['fonts/*.*'],
                         dest: '<%= inspinia.dist %>'
@@ -168,7 +175,11 @@ module.exports = function (grunt) {
                             'js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js',
                             'js/plugins/jvectormap/jquery-jvectormap-2.0.2.css',
                             'js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
-                            'js/bootstrap/angular-bootstrap-checkbox.js'
+                            'js/bootstrap/angular-bootstrap-checkbox.js',
+                            'css/plugins/c3/c3.min.css',
+                            'js/plugins/d3/d3.min.js',
+                            'js/plugins/c3/c3.min.js',
+                            'js/plugins/c3/c3-angular.min.js'
                         ]
                     },
                 ]
