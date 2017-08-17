@@ -33,6 +33,8 @@
         downloadUrl: downloadUrl,
         lastModified: lastModified
       });
+
+      
     }
 
     uploader.uploadItem = function (value) {
@@ -47,8 +49,10 @@
         item.isCancel = false;
         item.isError = false;
         writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
+        
+        vm.activeQuestion.value = downloadURL;
+        vm.fillAnswer();
         self._render();
-
       }, function (error) {
 
         console.log(error);
@@ -169,7 +173,7 @@
       {
         questionKey: "GSA Basins",
         id: "2.3",
-        info: 'Service boundaries may cover multiple groundwater basins. If you become a GSA in multiple basins, you may need to coordinate with other GSAs to develop/implement GSPs in multiple basins',
+        info: 'If you become a GSA in multiple basins, you may need to coordinate with other GSAs to develop/implement GSPs in multiple basins',
         template: function () {
           return 'components/gsa/2.3.html';
         },
@@ -178,25 +182,28 @@
       {
         questionKey: "Basin Boundary",
         id: "1.4",
-        info: 'GSA formation requires identification of the basin or the portion of a basin that your local agency (or agencies based on previous questions) intends to manage. The area your agency will manage should be constrained within a basin\'s boundaries. Exclusivity will only apply to the area within the service area (or collective service areas) of the local agency or agencies forming the GSA',
+        info: 'GSA formation requires identification of the basin or the portion of a basin that your local agency (or agencies based on previous questions) intends to manage. The area your agency will manage should be constrained within a basin\'s boundaries. Exclusivity will only apply to the area within the service area (or collective service areas) of the local agency or agencies forming the GSA. Service area shape file reflects the boundaries of a single local agency (or collective service area boundaries',
         template: function () {
           return 'components/gsa/1.4.html';
         },
         faqs: [{
           question: 'Basin Boundary Guidelines',
           answer: 'The area your agency will manage should be constrained within a basin\'s boundaries'
+        }, {
+          question: 'Service Area Guidelines',
+          answer: '"A service area shapefile attribute table should contain one record in the attribute table per service area. Include at least one field in the attribute table that identifies the name of the local agency.'
         }]
       },
       {
-        questionKey: "Service Area",
-        id: "1.5",
-        info: 'Service area shape file reflects the boundaries of a single local agency (or collective service area boundaries)',
+        questionKey: "Interested Party",
+        id: "1.6",
+        info: 'Interested parties means users that the GSA will allocate groundwater to and explain how the interested parties interests/needs will be considered when operating the GSAand how it will be implemented in the design/implementationof the GSP',
         template: function () {
-          return 'components/gsa/1.4.html';
+          return 'components/gsa/2.2.html';
         },
         faqs: [{
-          question: 'Service Area Guidelines',
-          answer: '"A service area shapefile attribute table should contain one record in the attribute table per service area. Include at least one field in the attribute table that identifies the name of the local agency.'
+          question: 'Who is considered an interested party?',
+          answer: '<br> 1. Agricultural users. <br> 2. Domestic well owners. <br> 3. Municpal well operators. <br> 4. Public Water Systems <br> 5. Local land use planning agencies. '
         }]
       }
     ];
