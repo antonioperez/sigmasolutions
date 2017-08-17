@@ -12,8 +12,7 @@
         controllerAs: 'account',
         templateUrl: "components/account/login.html",
         data: {
-          pageTitle: 'Login',
-          specialClass: 'gray-bg'
+          pageTitle: 'Login'
         }
       })
       .state('forgot_password', {
