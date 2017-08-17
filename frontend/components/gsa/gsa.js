@@ -77,14 +77,14 @@
 
     vm.questions = [{
         id: "1.1",
-        info: 'These local agencies will be considered "exclusive" within their statutory boundaries unless they opt out of this responsibility by sending a notice to DWR. No other local agency operating within the statutory boundaries of these exclusive local agencies may decide to become a GSA in these areas until DWR has received a notice stating otherwise.',
+        info: 'Certain agencies were created by statute to manage groundwater and shall be deemed exclusive local agencies within their respective statutory boundaries with powers. Please view the extensive list found at: <a href="http://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=WAT&sectionNum=10723">CA Legislature</a>',
         questionKey: "Exclusive Agency",
         template: function () {
           return 'components/gsa/1.1.html';
         },
         faqs: [{
-          question: 'What is an exclusive agency?',
-          answer: 'Only exclusive GSAs can coordinate to develop a GSP for a basin and submit that GSP to DWR for review. If not, there are alternative plans.'
+          question: 'Water Code §10723',
+          answer: 'An agency identified in this subdivision may opt out of being ann exclusive groundwater management agency within its statutory boundaries by sending a notice to the department.'
         }],
         moreAction: {
           id: "1.1.0",
