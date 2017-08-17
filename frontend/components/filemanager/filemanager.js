@@ -16,7 +16,8 @@
         var auth = firebase.auth();
         var storageRef = firebase.storage().ref();
         var database = firebase.database();
-        var recentFilesRef = database.ref('uploads/userid').limitToLast(10);
+        var user = auth.currentUser;
+        var recentFilesRef = database.ref('uploads/'+ user.uid).limitToLast(10);
         $scope.uploadedFiles = [];
 
         recentFilesRef.on('child_added', function (data) {
@@ -45,12 +46,12 @@
             //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
             var self = this;
             var file = value._file;
-            storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
+            storageRef.child(user.uid + '/' + file.name).put(file).then(function (snapshot) {
                 var downloadURL = snapshot.downloadURL;
                 item.isSuccess = true;
                 item.isCancel = false;
                 item.isError = false;
-                writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
+                writeUserData(user.uid, file.name, file.size, downloadURL, file.lastModified);
                 self._render();
 
             }, function (error) {

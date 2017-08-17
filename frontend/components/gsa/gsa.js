@@ -11,6 +11,7 @@
     var auth = firebase.auth();
     var storageRef = firebase.storage().ref();
     var database = firebase.database();
+    var user = auth.currentUser;
 
     vm.options = ['Alameda County Flood Control and Water Conservation District, Zone 7', 'Alameda County Water District', 'Desert Water Agency', 'Fox Canyon Groundwater Management Agency', 'Honey Lake Valley Groundwater Management District', 'Kings River East Groundwater Sustainability Agency', 'Long Valley Groundwater Management District', 'Mendocino City Community Services District', 'Mono County Tri-Valley Groundwater Management District', 'Monterey Peninsula Water Management District', 'North Fork Kings Groundwater Sustainability Agency', 'Ojai Groundwater Management Agency', 'Orange County Water District', 'Pajaro Valley Water Management Agency', 'Santa Clara Valley Water District', 'Sierra Valley Groundwater Management District', 'Willow Creek Groundwater Management Agency'];
     vm.answers = {};
@@ -42,12 +43,12 @@
       //BECAUSE IT IS SENDING TO A LOCAL PORT/URL. NEED TO SEND TO FIREBASE INSTEAD
       var self = this;
       var file = value._file;
-      storageRef.child('userid/' + file.name).put(file).then(function (snapshot) {
+      storageRef.child(user.uid + '/' + file.name).put(file).then(function (snapshot) {
         var downloadURL = snapshot.downloadURL;
         item.isSuccess = true;
         item.isCancel = false;
         item.isError = false;
-        writeUserData("userid", file.name, file.size, downloadURL, file.lastModified);
+        writeUserData(user.uid, file.name, file.size, downloadURL, file.lastModified);
         
         vm.activeQuestion.value = downloadURL;
         vm.fillAnswer();
