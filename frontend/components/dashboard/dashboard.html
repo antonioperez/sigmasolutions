@@ -102,24 +102,20 @@
         <div class="ibox float-e-margins">
           <div class="ibox-title">
             <h5>All Posted GSA Notices</h5>
-            <div ibox-tools></div>
+            <select class="input-sm form-control form-select input-s-sm inline pull-right" style="width:120px;">
+              <option value="0">11 Nov - 10 Dec</option>
+            </select>
+            <div class="clearfix"></div>
           </div>
           <div class="ibox-content">
-            <div class="row">
-              <div class="col-sm-3 col-sm-offset-9 m-b-xs">
-                <select class="input-sm form-control form-select input-s-sm inline">
-                  <option value="0">11 Nov - 10 Dec</option>
-                </select>
-              </div>
-            </div>
             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
                     <th></th>
+                    <th>ID</th>
                     <th>GSA Name</th>
                     <th>Basin</th>
-                    <th>Basin Number</th>
                     <th>Contact</th>
                     <th>County</th>
                     <th>Region</th>
@@ -130,10 +126,10 @@
                     <td>
                       <input icheck type="checkbox" data-ng-model="notice.selected">
                     </td>
-                    <td>{{notice.name}}</td>
+                    <td width="10%">{{notice.basin_number}}</td>
+                    <td width="25%">{{notice.name}}</td>
                     <td>{{notice.basin_name}}</td>
-                    <td>{{notice.basin_number}}</td>
-                    <td>{{notice.contact}}</td>
+                    <td width="25%">{{notice.contact}}</td>
                     <td>{{notice.county}}</td>
                     <td>{{notice.region}}</td>
                   </tr>
