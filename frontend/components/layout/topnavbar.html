@@ -1,16 +1,17 @@
 <div class="row">
   <nav class="navbar navbar-static-top white-bg m-b-0" role="navigation">
-    <ul class="nav navbar-top-links pull-right">
-      <li>
-        <button>
-          DM
+    <ul class="nav navbar-top-links pull-right" uib-dropdown>
+      <li uib-dropdown-toggle>
+        <button class="display-inline">
+          JS
         </button>
-      </li>
-      <li>
-        <a>
-          Daniel Mccloud
+        <a class="display-inline">
+          Jon Snow <i class="logout-dropdown icon ion-chevron-down"></i>
         </a>
-    </li>
+      </li>
+      <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+        <li><a ui-sref="login">Logout</a></li>
+      </ul>
     </ul>
   </nav>
 </div>
