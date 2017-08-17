@@ -5,12 +5,13 @@ angular
     .service('mapservice', function ($http) {
 
         var self = this;
+        var defaultCenter = [36.8, -120];
         var CONVERTER_URL = "http://sgma.ecoverse.io/mapper/convertJson";
         self.generateMap = function (mapId, zoom, zipPath, backgroundOptions, popupContent, searchKey, addDrawingOptions, customFeatureCallback) {
 
             $("#"+mapId).css('width', "100%");
             $("#"+mapId).css('height', "500px");
-            var map = L.map(mapId).setView([36.8, -120], zoom);
+            var map = L.map(mapId).setView(defaultCenter, zoom);
             var layer = L.esri.basemapLayer("Topographic").addTo(map);
 
             var options = {

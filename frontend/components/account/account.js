@@ -7,10 +7,11 @@
             '$scope',
             '$location',
             '$state',
+            '$cookies',
             Ctrl
         ]);
 
-    function Ctrl($http, $scope, $location, $state) {
+    function Ctrl($http, $scope, $location, $state, $cookies) {
 
         var auth = firebase.auth();
         //demo info
@@ -28,6 +29,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
                     console.log(user);
+                    $cookies.put('user', user);
                     $state.go('index.dashboard');
                 })
                 .catch(function (error) {
@@ -48,6 +50,7 @@
                 .then(function (user) {
                     console.log(user);
                     sendEmailVerification();
+                    $cookies.put('user', user);
                     $state.go('index.dashboard');
                 })
                 .catch(function (error) {
@@ -110,6 +113,7 @@
         $scope.signOut = function () {
             if (auth.currentUser) {
                 auth.signOut();
+                $cookies.remove('user');
                 $state.go('index.login');
             }
             

@@ -6,7 +6,7 @@
     .run([ '$rootScope', '$state', function($rootScope, $state) {
       $rootScope.$state = $state;
     }])
-    .run(['$rootScope', '$state', statesConfig]);
+    .run(['$rootScope', '$state', '$cookies', statesConfig]);
 
   function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/login");
@@ -18,9 +18,15 @@
       })
   }
 
-  function statesConfig ($rootScope, $state) {
+  function statesConfig ($rootScope, $state, $cookies) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams) {
-      if (!firebase.auth().currentUser) {
+      var fUser = firebase.auth().currentUser;
+      var user = $cookies.get('user');
+      if (user != null) {
+        fUser = user;
+      }
+
+      if (!fUser) {
         if (toState.name !== 'login') {
           evt.preventDefault();
           $state.go('login');
