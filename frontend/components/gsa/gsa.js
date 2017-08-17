@@ -132,8 +132,8 @@
         faqs: [],
         moreAction: {
           id: "1.3",
-          questionKey: "Joint Powers",
-          info: 'Upload joint Powers Agreeement, Memorandum of Agreement and Coordination Agreements',
+          questionKey: "Multiple Agencies Legal Agreement",
+          info: 'Upload Joint Powers Agreeement, Memorandum of Agreement or Coordination Agreement',
           template: function () {
             return 'components/gsa/1.3.html';
           },
