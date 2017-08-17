@@ -12,7 +12,7 @@
     var storageRef = firebase.storage().ref();
     var database = firebase.database();
 
-    vm.options = ['first option', 'second option', 'third option'];
+    vm.options = ['Alameda County Flood Control and Water Conservation District, Zone 7', 'Alameda County Water District', 'Desert Water Agency', 'Fox Canyon Groundwater Management Agency', 'Honey Lake Valley Groundwater Management District', 'Kings River East Groundwater Sustainability Agency', 'Long Valley Groundwater Management District', 'Mendocino City Community Services District', 'Mono County Tri-Valley Groundwater Management District', 'Monterey Peninsula Water Management District', 'North Fork Kings Groundwater Sustainability Agency', 'Ojai Groundwater Management Agency', 'Orange County Water District', 'Pajaro Valley Water Management Agency', 'Santa Clara Valley Water District', 'Sierra Valley Groundwater Management District', 'Willow Creek Groundwater Management Agency'];
     vm.answers = {};
     vm.percent = 0;
 
@@ -77,15 +77,20 @@
 
     vm.questions = [{
         id: "1.1",
-        info: 'Certain agencies were created by statute to manage groundwater and shall be deemed exclusive local agencies within their respective statutory boundaries with powers. Please view the extensive list found at: <a href="http://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=WAT&sectionNum=10723">CA Legislature</a>',
-        questionKey: "Exclusive Agency",
+        info: 'Are you a local agency eligible to form a groundwater sustainable agency as per water code 10721 and water code 10723?',
+        questionKey: "Eligible Agency",
         template: function () {
           return 'components/gsa/1.1.html';
         },
-        faqs: [{
-          question: 'Water Code §10723',
-          answer: 'An agency identified in this subdivision may opt out of being ann exclusive groundwater management agency within its statutory boundaries by sending a notice to the department.'
-        }],
+        faqs: [
+          {
+            question: 'What is water code 10721?',
+            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
+          },
+          {
+            question: 'What is water code 10723?',
+            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
+          }],
         moreAction: {
           id: "1.1.0",
           questionKey: "Alternative Plan",
@@ -103,14 +108,7 @@
         template: function () {
           return 'components/gsa/1.0.html';
         },
-        faqs: [{
-            question: 'What is water code 10721?',
-            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
-          },
-          {
-            question: 'What is water code 10723?',
-            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
-          }
+        faqs: [
         ]
       }, {
         id: "1.2",
