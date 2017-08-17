@@ -17,10 +17,12 @@
               </div>
             </div>
             <div class="col-sm-8">
-              <p class="form-title" ng-bind-html="gsa.activeTitle"></p>
-              <p class="form-info" ng-bind-html="gsa.activeQuestion.info"></p>
-              <div data-ng-include="gsa.activeQuestion.template()"></div>
-              <div class="row">
+              <div class="form-main-row">
+                <p class="form-title" ng-bind-html="gsa.activeTitle"></p>
+                <p class="form-info" ng-bind-html="gsa.activeQuestion.info"></p>
+                <div data-ng-include="gsa.activeQuestion.template()"></div>
+              </div>
+              <div class="form-direction-row">
                 <hr>
                 <div class="form-group col-md-12 p-l-0 m-t-12">
                   <button class="btn form-btn m-r-md" ng-click="gsa.goBack()" ng-show="gsa.questionIndex > 0 || gsa.sectionIndex >= 1">Back</button>
@@ -28,7 +30,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-4 p-r-0 m-t-lg">
+            <div class="col-sm-4 p-r-0" id="faq-side">
               <p class="form-faq" ng-show="gsa.activeQuestion.faqs.length">FAQ</p>
               <div ng-repeat="faq in gsa.activeQuestion.faqs">
                 <span class="form-q">Q: <span class="form-q-a" ng-bind-html="faq.question"></span></span>
