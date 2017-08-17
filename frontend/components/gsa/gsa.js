@@ -243,8 +243,16 @@
     }
 
     vm.fillAnswer = function () {
+      
       if (vm.activeQuestion) {
-        var answer = vm.activeQuestion.value;
+        var markupStr = $('#summernote').summernote('code');
+        var answer = "";
+        if (typeof markupStr === 'string') {
+          answer = markupStr;
+        } else {
+          answer = vm.activeQuestion.value;
+        }
+
         var questionKey = vm.activeQuestion.questionKey;
         vm.answers[questionKey] = answer;
       }
