@@ -277,6 +277,7 @@
           vm.setQuestion(question);
           vm.questionIndex += 1;
         } else if (isNextSection) {
+          vm.questionIndex += 1;
           vm.percent += percentPadder;
           vm.sectionIndex += 1;
           vm.questionIndex = 0;
