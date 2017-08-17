@@ -16,11 +16,11 @@
           loadPlugin: [ '$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load([
               {
-                files: ['js/plugins/chartJs/Chart.min.js']
-              },
-              {
                 name: 'angles',
                 files: ['js/plugins/chartJs/angles.js']
+              },
+              {
+                files: ['js/plugins/chartJs/Chart.min.js']
               },
               {
                 serie: true,

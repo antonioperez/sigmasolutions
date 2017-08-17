@@ -72,7 +72,7 @@
       <div class="col-md-6">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Well Data</h5>
+          <h5>Groundwater Usage / Well Maintenance Cost</h5>
           <div class="pull-right">
             <div class="btn-group">
               <button type="button" class="btn btn-xs btn-white">
@@ -86,10 +86,8 @@
         </div>
         <div class="ibox-content">
           <div class="row">
-            <div class="col-xs-12">
-              <div class="flot-chart">
-                <div flot class="flot-chart-content" dataset="dashboard.flotData" options="dashboard.flotOptions"></div>
-              </div>
+            <div class="col-xs-12" style="overflow:hidden;">
+              <canvas class="m-t-lg" linechart options="dashboard.lineOptions" data="dashboard.lineData" height="500" responsive=true></canvas>
             </div>
           </div>
         </div>
