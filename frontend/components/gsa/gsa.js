@@ -148,8 +148,8 @@
     vm.questions2 = [
       {
         id: "2.0",
-        info: '',
         questionKey: "Contact",
+        info: '',
         template: function () {
           return 'components/gsa/2.0.html';
         },
@@ -158,7 +158,7 @@
       }, {
         id: "2.1",
         questionKey: "Creation Date",
-        info: 'Please enter or select the date when your agency declared its GSA status:',
+        info: '',
         template: function () {
           return 'components/gsa/2.1.html';
         },
@@ -168,9 +168,9 @@
         }]
       },
       {
-        questionKey: "GSA Descrip",
+        questionKey: "GSA Description",
         id: "2.2",
-        info: 'Describe your GSA',
+        info: '',
         template: function () {
           return 'components/gsa/2.2.html';
         },
@@ -179,7 +179,7 @@
       {
         questionKey: "GSA Basins",
         id: "2.3",
-        info: 'If you become a GSA in multiple basins, you may need to coordinate with other GSAs to develop/implement GSPs in multiple basins',
+        info: '',
         template: function () {
           return 'components/gsa/2.3.html';
         },
@@ -187,25 +187,26 @@
       },
       {
         questionKey: "Basin Boundary",
-        id: "1.4",
-        info: 'GSA formation requires identification of the basin or the portion of a basin that your local agency (or agencies based on previous questions) intends to manage. The area your agency will manage should be constrained within a basin\'s boundaries. Exclusivity will only apply to the area within the service area (or collective service areas) of the local agency or agencies forming the GSA. Service area shape file reflects the boundaries of a single local agency (or collective service area boundaries',
+        id: "2.4",
+        info: 'GSA formation requires identification of the basin or the portion of a basin that your local agency intends to manage.',
         template: function () {
           return 'components/gsa/1.4.html';
         },
         faqs: [{
-          question: 'Basin Boundary Guidelines',
-          answer: 'The area your agency will manage should be constrained within a basin\'s boundaries'
-        }, {
+          question: 'Where will exclusivity apply?',
+          answer: 'Exclusivity will only apply to the area within the service area (or collective service areas) of the local agency or agencies forming the GSA. Service area shape file reflects the boundaries of a single local agency (or collective service area boundaries'
+        },
+        {
           question: 'Service Area Guidelines',
           answer: '"A service area shapefile attribute table should contain one record in the attribute table per service area. Include at least one field in the attribute table that identifies the name of the local agency.'
         }]
       },
       {
-        questionKey: "Interested Party",
-        id: "1.6",
-        info: 'Interested parties means users that the GSA will allocate groundwater to and explain how the interested parties interests/needs will be considered when operating the GSAand how it will be implemented in the design/implementationof the GSP',
+        questionKey: "Interested Parties",
+        id: "2.5",
+        info: '',
         template: function () {
-          return 'components/gsa/2.2.html';
+          return 'components/gsa/2.5.html';
         },
         faqs: [{
           question: 'Who is considered an interested party?',
@@ -214,8 +215,8 @@
       },
       {
         questionKey: "Adopted Laws",
-        id: "1.6",
-        info: 'Copies of any new by laws, ordinances or new authorities adopted by your agency. ',
+        id: "2.6",
+        info: 'Please upload copies of any new by laws, ordinances or new authorities adopted by your agency:',
         template: function () {
           return 'components/gsa/1.3.html';
         },
@@ -228,7 +229,7 @@
         questions: vm.questions
       },
       {
-        title: "Select Contact Person",
+        title: "GSA Information",
         questions: vm.questions2
       }
     ]
