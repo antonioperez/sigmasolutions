@@ -43,7 +43,11 @@
     "firebase": "^4.2.0",
     "angular-chosen-localytics": "^1.8.0",
     "chosen": "^1.7.0",
-    "angular-summernote": "^0.8.1"
+    "angular-summernote": "^0.8.1",
+    "angular-svg-round-progressbar": "0.4.8",
+    "s-circle-progress": "^0.1.0",
+    "progress-bubble": "^1.3.1",
+    "c3": "^0.4.16"
   },
   "resolutions": {
     "angular": "~1.5.0",

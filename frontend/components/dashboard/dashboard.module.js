@@ -38,6 +38,15 @@
               {
                 name: 'ui.checkbox',
                 files: ['js/bootstrap/angular-bootstrap-checkbox.js']
+              },
+              {
+                serie: true,
+                files: ['css/plugins/c3/c3.min.css', 'js/plugins/d3/d3.min.js', 'js/plugins/c3/c3.min.js']
+              },
+              {
+                  serie: true,
+                  name: 'gridshore.c3js.chart',
+                  files: ['js/plugins/c3/c3-angular.min.js']
               }
             ]);
           }]

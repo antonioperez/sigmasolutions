@@ -11,6 +11,12 @@
 
     function Ctrl ($http, gsaservice, mapservice) {
       var vm = this;
+
+      vm.progressData = {
+        max: 100,
+        current: 60,
+        color: '#56BD5B'
+      }
       
       vm.generateMap = function (map) {
         vm.countymap = mapservice.generateMap("js-leaflet-map", map.zoom, "data/" + map.file + ".zip", map.background,
