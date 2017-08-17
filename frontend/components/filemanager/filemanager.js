@@ -17,17 +17,16 @@
         var storageRef = firebase.storage().ref();
         var database = firebase.database();
         var user = auth.currentUser;
-        var recentFilesRef = database.ref('uploads/'+ user.uid).limitToLast(10);
+        var recentFilesRef = {};
+        if (user) {
+            recentFilesRef = database.ref('uploads/'+ user.uid).limitToLast(10);
+            recentFilesRef.on('child_added', function (data) {
+                var childData = data.val();
+                $scope.uploadedFiles.push(childData);
+                $scope.$apply();
+            });
+        }
         $scope.uploadedFiles = [];
-
-        recentFilesRef.on('child_added', function (data) {
-            var childData = data.val();
-            $scope.uploadedFiles.push(childData);
-            $scope.$apply();
-        });
-
-
-
         function writeUserData(userId, filename, size, downloadUrl, lastModified) {
             //fancy hashing algorithm goes here
             var encodedData = window.btoa(filename);
