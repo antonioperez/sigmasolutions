@@ -328,6 +328,7 @@
       if (isMoreAction) {
         vm.setMoreAction(isMoreAction);
       } else {
+        vm.setMoreAction(isMoreAction);
         vm.activeQuestion.jumpTo = null;
       }
       vm.activeQuestion.value = val;
