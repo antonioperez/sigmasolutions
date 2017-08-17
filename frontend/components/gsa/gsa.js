@@ -340,8 +340,6 @@
     }
 
     vm.goBack = function () {
-      console.log(vm.sectionIndex);
-      console.log(vm.questionIndex);
       if (vm.sectionIndex >= 1 & vm.questionIndex < 1) {
 
         vm.percent -= percentPadder;
