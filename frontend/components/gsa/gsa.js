@@ -293,7 +293,7 @@
         console.log(index);
         vm.questionIndex = index;
         question = vm.sections[vm.sectionIndex].questions[index];
-        vm.setQuestion(question);
+        vm.setView(question);
         
       } else if (vm.activeQuestion.more) {
         vm.activeQuestion.more = false;
@@ -340,6 +340,8 @@
     }
 
     vm.goBack = function () {
+      console.log(vm.sectionIndex);
+      console.log(vm.questionIndex);
       if (vm.sectionIndex >= 1 & vm.questionIndex < 1) {
 
         vm.percent -= percentPadder;
