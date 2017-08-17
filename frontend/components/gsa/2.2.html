@@ -3,7 +3,7 @@
         <label class="font-normal form-label col-xs-12">
             Describe your local agency's water supply, water management or land use responsibilities within the groundwater basin(s) you intend to manage
         </label>
-        <textarea id="summernote" name="value"></textarea>
+        <textarea id="summernote" ng-model = "gsa.activeQuestion.value"></textarea>
         <script>
             $(document).ready(function() {
                 $('#summernote').summernote({

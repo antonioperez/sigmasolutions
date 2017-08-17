@@ -271,11 +271,11 @@
         vm.setQuestion(vm.activeQuestion.moreAction);
       } else {
         var nextIndex = vm.questionIndex + 1;
-        var question = vm.sections[vm.sectionIndex].questions[vm.questionIndex];
+        var question = vm.sections[vm.sectionIndex].questions[nextIndex];
         var isNextSection = vm.sections[vm.sectionIndex + 1];
         if (question) {
-          vm.setQuestion(question);
           vm.questionIndex += 1;
+          vm.setQuestion(question);
         } else if (isNextSection) {
           vm.questionIndex += 1;
           vm.percent += percentPadder;
