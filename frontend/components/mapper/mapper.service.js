@@ -11,9 +11,14 @@ angular
 
             $("#"+mapId).css('width', "100%");
             $("#"+mapId).css('height', "500px");
-            var map = L.map(mapId).setView(defaultCenter, zoom);
+            var map = L.map(mapId, {
+                zoomControl: false
+            }).setView(defaultCenter, zoom);
             var layer = L.esri.basemapLayer("Topographic").addTo(map);
 
+            var zoomHome = L.Control.zoomHome();
+            zoomHome.addTo(map);
+            
             var options = {
                 searchKey : searchKey, 
                 addDrawingOptions : addDrawingOptions,
