@@ -28,7 +28,6 @@
             // Sign in with email and pass.
             auth.signInWithEmailAndPassword(email, password)
                 .then(function (user) {
-                    console.log(user);
                     $cookies.put('user', user);
                     $state.go('index.dashboard');
                 })
@@ -48,7 +47,6 @@
         var signup = function (email, password) {
             auth.createUserWithEmailAndPassword(email, password)
                 .then(function (user) {
-                    console.log(user);
                     sendEmailVerification();
                     $cookies.put('user', user);
                     $state.go('index.dashboard');
@@ -77,7 +75,6 @@
         $scope.signIn = function () {
 
             if (auth.currentUser) {
-                console.log("Sign out");
                 auth.signOut();
             }
             $scope.password = $scope.password.trim();
