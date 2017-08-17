@@ -147,7 +147,7 @@
     vm.questions2 = [
       {
         id: "2.0",
-        info: '',
+        info: 'omg mine',
         questionKey: "Contact",
         template: function () {
           return 'components/gsa/2.0.html';
