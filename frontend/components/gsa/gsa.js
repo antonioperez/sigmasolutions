@@ -16,7 +16,6 @@
     vm.answers = {};
     vm.percent = 0;
 
-
     vm.sectionIndex = 0;
     vm.questionIndex = 0;
     vm.questionTop = []
@@ -84,13 +83,13 @@
         },
         faqs: [
           {
-            question: 'What is water code 10721?',
-            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
-          },
-          {
-            question: 'What is water code 10723?',
-            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
-          }],
+          question: 'What is water code 10721?',
+          answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
+        },
+        {
+          question: 'What is water code 10723?',
+          answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
+        }],
         moreAction: {
           id: "1.1.0",
           questionKey: "Alternative Plan",
@@ -102,15 +101,27 @@
         }
       },
       {
+        id: "1.0.1",
+        info: 'Are you considered an exclusive agency?',
+        questionKey: "Exclusive Agency",
+        template: function () {
+          return 'components/gsa/1.0.1.html';
+        },
+        faqs: [
+        ],
+        jumpTo: "1.2"
+      },       
+      {
         id: "1.0",
-        info: 'You have determined that you are either an existing local agency eligible to become a GSA, or have formed a GSA through a legal agreement with other GSA-eligible local agencies.',
-        questionKey: "Agency Name",
+        info: '',
+        questionKey: "Select Exclusive Agency",
         template: function () {
           return 'components/gsa/1.0.html';
         },
         faqs: [
         ]
-      }, {
+      }, 
+      {
         id: "1.2",
         questionKey: "Multiple Agencies",
         info: 'Are you going to form a GSA with multiple local agencies?',
@@ -272,7 +283,19 @@
     vm.nextQuestion = function () {
       vm.fillAnswer();
       var questionsLen = vm.sections[vm.sectionIndex].questions.length;
-      if (vm.activeQuestion.more) {
+
+      var question = vm.activeQuestion;
+      var jump = question.jumpTo;
+
+      if(jump != null) {
+        var questions = vm.sections[vm.sectionIndex].questions;
+        var index = questions.map(function (quest) { return quest.id; }).indexOf(jump);
+        console.log(index);
+        vm.questionIndex = index;
+        question = vm.sections[vm.sectionIndex].questions[index];
+        vm.setQuestion(question);
+        
+      } else if (vm.activeQuestion.more) {
         vm.activeQuestion.more = false;
         vm.setQuestion(vm.activeQuestion.moreAction);
       } else {
