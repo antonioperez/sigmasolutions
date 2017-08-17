@@ -147,19 +147,12 @@
     vm.questions2 = [
       {
         id: "2.0",
-        info: 'What is your contact information?',
+        info: '',
         questionKey: "Contact",
         template: function () {
           return 'components/gsa/2.0.html';
         },
-        faqs: [{
-            question: 'What is water code 10721?',
-            answer: '"Local agency" means a local public agency that has water supply, water management, or land use responsibilities within a groundwater basin.'
-          },
-          {
-            question: 'What is water code 10723?',
-            answer: 'Any local agency or combination of local agencies overlying a groundwater basin may decide to become a GSA for that basin.'
-          }
+        faqs: [
         ]
       }, {
         id: "2.1",
@@ -231,7 +224,7 @@
         questions: vm.questions
       },
       {
-        title: "GSA Notice Requirements",
+        title: "Select Contact Person",
         questions: vm.questions2
       }
     ]
