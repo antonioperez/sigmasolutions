@@ -16,7 +16,7 @@
           title: 'Decision To Become A GSP',
           info: 'What was your groundwater usage?',
           template: function () {
-            return 'components/gsp/templates/start-gsa.html';
+            return 'components/gsp/start-gsa.html';
           }
         }
       ];
