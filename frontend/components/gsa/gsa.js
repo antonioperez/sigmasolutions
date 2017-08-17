@@ -333,6 +333,8 @@
     vm.changeValue = function (val, isMoreAction) {
       if (isMoreAction) {
         vm.setMoreAction(isMoreAction);
+      } else {
+        vm.activeQuestion.jumpTo = null;
       }
       vm.activeQuestion.value = val;
     }
